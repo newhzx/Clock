@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    //签名打包参数
+    signingConfigs {
+        config {
+            keyAlias 'Clock'
+            keyPassword '123456'
+            storeFile file('X:/Users/asd/jes/Clock.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.asd.clock"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //Android的网络请求强制使用HttpUrlConnection,并且SDK中也已经移除了HttpClient。
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    //黄油刀添加依赖
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    //Xutils添加依赖
+    compile 'org.xutils:xutils:3.5.0'
+    compile 'com.jiechic.library:xUtils:2.6.14'
+    //Dom4j添加依赖
+    implementation files('libs/dom4j-2.0.2.jar')
+    //dom4j搜索select需要jaxen支持
+    implementation files('libs/jaxen-1.1-beta-6.jar')
+    //支持混淆步骤2
+    compile 'com.android.support:multidex:1.0.1'
+}

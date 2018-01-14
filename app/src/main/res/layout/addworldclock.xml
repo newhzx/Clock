@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--添加世界时钟界面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--标题-->
+   <TextView android:layout_height="wrap_content"
+       android:layout_width="match_parent"
+       android:paddingTop="5dp"
+       android:paddingBottom="5dp"
+       android:gravity="center_horizontal"
+       android:text="选取城市。"/>
+    <!--添加时钟布局-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--搜索栏-->
+        <com.example.asd.clock.WorldClock.Sortlist.ClearEditText
+            android:id="@+id/et_searchTextView"
+            android:textCursorDrawable="@drawable/gbcolor"
+            android:background="@drawable/addworldclock_search_bg"
+            android:drawableLeft="@drawable/search"
+            android:layout_marginLeft="10dp"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"/>
+        <Button
+            android:text="取消"
+            android:onClick="disAddWorldClock"
+            android:textColor="@color/colorOrange"
+            android:background="@null"
+            android:layout_height="wrap_content"
+            android:layout_width="50dp"/>
+    </LinearLayout>
+    <!--灰线-->
+    <include layout="@layout/viewline"/>
+    <!--搜索内容 包括侧边字母搜索栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--城市列表-->
+        <ListView
+            android:id="@+id/lv_addworldclock"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="15dp"
+            android:divider="@null"
+            android:scrollbars="none" />
+        <!--侧边栏-->
+        <com.example.asd.clock.WorldClock.Sortlist.SideBar
+            android:id="@+id/sb_sidrbar"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="80dp"
+            android:layout_marginTop="80dp">
+        </com.example.asd.clock.WorldClock.Sortlist.SideBar>
+    </RelativeLayout>
+</LinearLayout>

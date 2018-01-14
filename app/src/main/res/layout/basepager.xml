@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--顶部选择栏-->
+    <RelativeLayout
+        android:padding="5dp"
+        android:background="@color/colorDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--<编辑按钮>-->
+        <Button
+            style="@style/BasePagerButtonStyle"
+            android:id="@+id/editview"
+            android:layout_alignParentLeft="true"
+            android:text="编辑"></Button>
+        <!--标题-->
+        <TextView
+            android:id="@+id/titleview"
+            style="@style/BasePagerTextViewStyle" />
+        <!--添加按钮-->
+        <Button
+            style="@style/BasePagerButtonStyle"
+            android:id="@+id/addview"
+            android:layout_alignParentRight="true"
+            android:text="添加"></Button>
+    </RelativeLayout>
+    <!--灰线-->
+    <include layout="@layout/viewline"/>
+    <!--帧布局 替换-->
+    <FrameLayout
+        android:id="@+id/basefragment"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="match_parent">
+    </FrameLayout>
+</LinearLayout>

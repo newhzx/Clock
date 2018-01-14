@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--地区排列item 包括 abcd的Text栏 和地区的Text栏-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--分割栏 即ABCD等-->
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorDark"
+        android:background="@color/colorSimpleDark"
+        android:id="@+id/tv_zone"/>
+    <!--地区名称-->
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/tv_title"/>
+    <!--灰线-->
+    <View
+        android:layout_marginLeft="10dp"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="@color/colorSimpleDark" />
+</LinearLayout>
