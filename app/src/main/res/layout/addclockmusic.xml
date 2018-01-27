@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--音乐页面-->
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--添加铃声头部-->
+    <RelativeLayout
+        android:id="@+id/rl_addclock_bottom_music_top"
+        style="@style/AddClockBottomTopStyle">
+        <Button
+            android:id="@+id/btn_addclockmusic"
+            android:text="@string/back"
+            style="@style/AddClockBottomTopBackStyle" />
+        <TextView
+            style="@style/AddClockBottomTopTitleStyle"
+            android:text="@string/music" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_addclockmusic"
+        style="@style/AddClockBottomTopLineStyle"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_addclock_bottom_music_vibrator"
+        style="@style/MWStyle"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/addclock_bg_selector"
+        android:clickable="true">
+
+        <Button
+            style="@style/AddClockBottomButtonStyle"
+            android:id="@+id/btn_addclockmusic_vibrator"
+            android:layout_alignParentLeft="true"
+            android:text="@string/vibrator"
+            android:textColor="@color/colorWhite" />
+        <TextView
+            android:id="@+id/tv_music_vibrator"
+            style="@style/AddClockBottomTextStyle"
+            android:layout_toLeftOf="@id/tv_music_vibrator_rightrow"
+            android:text="默认" />
+        <TextView
+            android:id="@+id/tv_music_vibrator_rightrow"
+            style="@style/AddClockBottomBackStyle"
+            android:text=">" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_addclock_phonemusic"
+        android:text="@string/phonemusic"
+        style="@style/AddClockBottomMusicTextStyle"/>
+
+    <RelativeLayout
+        android:id="@+id/ll_addclock_phonemusic"
+        style="@style/MWStyle">
+        <ListView
+            android:id="@+id/lv_addclockmusic"
+            style="@style/MWStyle"
+            android:background="@drawable/addclock_bg"
+            android:choiceMode="singleChoice"
+            android:divider="@null" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_addclock_bottom_music_none"
+        style="@style/MWStyle"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/addclock_bg_selector">
+
+        <CheckBox
+            android:id="@+id/cb_phonemusic_none"
+            style="@style/CheckBoxStyle"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/tv_phonemusic"
+            android:text="@string/none"
+            android:layout_toRightOf="@+id/cb_phonemusic_none"
+            style="@style/AddClockPhoneMusicNoneStyle"/>
+    </RelativeLayout>
+</LinearLayout>
+</ScrollView>

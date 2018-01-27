@@ -21,9 +21,6 @@ import com.example.asd.clock.Utils.XMLUtils;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by asd on 2018/1/6.
- */
 //世界时钟适配器
 public class WorldClockAdapter extends BaseAdapter{
     private int right;//离右侧的距离

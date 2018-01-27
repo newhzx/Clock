@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">Clock</string>
-    fa-close
+
+    <!--添加闹钟-->
+    <string name="cancel">取消</string>
+    <string name="add">存储</string>
+    <string name="addclock">添加闹钟</string>
+    <string name="repeat">重复</string>
+    <string name="tag">标签</string>
+    <string name="music">铃声</string>
+    <string name="tips">稍后提醒</string>
+    <string name="vibrator">振动</string>
+    <string name="phonemusic">电话铃声</string>
+    <string name="none">无</string>
+    <string name="back">返回</string>
+    <string name="forover">永久</string>
+    <string name="clock">闹钟</string>
+    <string name="leida">Argon</string>
+    <string name="standrad">标准</string>
+
+
 </resources>

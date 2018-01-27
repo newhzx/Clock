@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--铃声item-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MWStyle"
+    android:descendantFocusability="blocksDescendants"
+    android:id="@+id/rl_addclock_bottom_music_choose"
+    android:background="@drawable/addclock_bg_choose">
+    <CheckBox
+        style="@style/CheckBoxStyle"
+        android:id="@+id/cb_phonemusic" />
+    <TextView
+        android:id="@+id/tv_phonemusic"
+        android:background="@drawable/addclock_bg_bottom"
+        android:layout_toRightOf="@+id/cb_phonemusic"
+        style="@style/AddClockPhoneMusicNoneStyle"/>
+</RelativeLayout>

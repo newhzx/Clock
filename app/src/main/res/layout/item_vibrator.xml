@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--振动item-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/addclock_bg_repeat"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/addclock_bg_bottom"
+        style="@style/MWStyle">
+        <TextView
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            style="@style/WWStyle"
+            android:id="@+id/tv_vibrator"/>
+        <CheckBox
+            android:id="@+id/cb_vibrator"
+            android:paddingRight="20dp"
+            android:layout_alignParentRight="true"
+            style="@style/CheckBoxStyle"/>
+    </RelativeLayout>
+</LinearLayout>

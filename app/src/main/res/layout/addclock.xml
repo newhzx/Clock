@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--添加铃声页面-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/addclock_top"
+        layout="@layout/addclock_top"></include>
+    <View
+        style="@style/AddClockBottomTopLineStyle"
+        android:layout_below="@+id/addclock_top" />
+    <LinearLayout
+        android:id="@+id/ll_addclock_loopview"
+        style="@style/MWStyle"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <com.weigan.loopview.LoopView
+            android:id="@+id/loopViewline"
+            style="@style/LoopViewStyle" />
+
+        <com.weigan.loopview.LoopView
+            android:id="@+id/loopViewLunch"
+            style="@style/LoopViewStyle" />
+
+        <com.weigan.loopview.LoopView
+            android:id="@+id/loopViewHour"
+            style="@style/LoopViewStyle" />
+
+        <com.weigan.loopview.LoopView
+            android:id="@+id/loopViewMinute"
+            style="@style/LoopViewStyle" />
+
+        <com.weigan.loopview.LoopView
+            android:id="@+id/loopViewlines"
+            style="@style/LoopViewStyle" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_addclock_loopview"
+        style="@style/AddClockBottomTopLineStyle"
+        android:layout_below="@+id/ll_addclock_loopview" />
+
+    <include
+        android:id="@+id/addclock_bottom"
+        layout="@layout/addclock_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_addclock_loopview" />
+    <View
+        style="@style/AddClockBottomTopLineStyle"
+        android:layout_below="@+id/addclock_bottom" />
+</RelativeLayout>

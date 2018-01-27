@@ -8,6 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="WWStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="MWStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="MWWStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">5</item>
+    </style>
+
+    <style name="WMStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="MMStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
     <style name="LinearLayoutStyle">
         <item name="android:gravity">center</item>
         <item name="android:orientation">vertical</item>
@@ -39,4 +65,97 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
+
+    <style name="LoopViewStyle">
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginTop">50dp</item>
+    </style>
+
+    <style name="AddClockStyle" parent="WWStyle">
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="WWStyle" >
+        <item name="android:button">@drawable/addclock_checkbox_selector</item>
+        <item name="android:background">@null</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="AddClockBottomTopStyle" parent="MWStyle">
+        <item name="android:background">@color/colorDark</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="AddClockBottomTopBackStyle" parent="WWStyle">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:text">@string/back</item>
+        <item name="android:textColor">@color/colorOrange</item>
+    </style>
+
+    <style name="AddClockBottomTopTitleStyle" parent="WWStyle">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="AddClockBottomTopLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorSimpleDark</item>
+    </style>
+
+    <style name="AddClockBottomChooseStyle" parent="WWStyle">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <style name="AddClockBottomRelativeStyle" parent="MWStyle">
+        <item name="android:background">@drawable/addclock_bg_selector_choose</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="AddClockBottomTextStyle" parent="WWStyle">
+        <item name="android:textColor" >@color/colorSimpleDark</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="AddClockBottomButtonStyle" parent="WWStyle">
+        <item name="android:textColor" >@color/colorSimpleDark</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="AddClockBottomMusicTextStyle" parent="WWStyle">
+        <item name="android:textColor" >@color/colorSimpleDark</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+    </style>
+
+    <style name="AddClockBottomBackStyle" parent="AddClockBottomTextStyle">
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="AddClockBottomSwitchStyle" parent="MWStyle">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="AddClockPhoneMusicNoneStyle" parent="MWStyle">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 </resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--添加时钟头部页面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MWStyle"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/colorDark"
+        style="@style/MWStyle">
+        <Button
+            android:id="@+id/cancel"
+            android:text="@string/cancel"
+            style="@style/AddClockStyle"/>
+        <TextView
+            style="@style/MWWStyle"
+            android:gravity="center_horizontal"
+            android:text="@string/addclock"/>
+        <Button
+            android:id="@+id/add"
+            android:text="@string/add"
+            style="@style/AddClockStyle"/>
+    </LinearLayout>
+</LinearLayout>

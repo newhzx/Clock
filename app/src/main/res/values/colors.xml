@@ -12,4 +12,5 @@
     <color name="colorOrange">#f39800</color>
     <color name="colorDark">#b222</color>
     <color name="colorSimpleDark">#b666</color>
+    <color name="colorSimDark">#ddbeb3b3</color>
 </resources>

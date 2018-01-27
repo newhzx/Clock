@@ -19,10 +19,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-/**
- * Created by asd on 2018/1/7.
- */
 //世界时钟读写XML工具类 需要使用dom4j jar包
 public class XMLUtils {
     //写入更新到xml文件中

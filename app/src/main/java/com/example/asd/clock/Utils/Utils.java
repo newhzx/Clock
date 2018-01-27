@@ -15,10 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by asd on 2018/1/4.
- */
-
 public class Utils {
     //设置list的getter和setter结合
     private static List<WorldClock> list;

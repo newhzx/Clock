@@ -36,9 +36,6 @@ import java.util.List;
 import static com.example.asd.clock.Utils.XMLUtils.readWorldClock;
 import static java.lang.Integer.parseInt;
 
-/**
- * Created by asd on 2017/12/27.
- */
 //世界时钟界面
 @SuppressLint("ValidFragment")
 public class WorldClockFragment extends BaseFragment{

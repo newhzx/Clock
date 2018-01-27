@@ -49,4 +49,6 @@ dependencies {
     implementation files('libs/jaxen-1.1-beta-6.jar')
     //支持混淆步骤2
     compile 'com.android.support:multidex:1.0.1'
+    //滚轮
+    implementation 'com.weigan:loopView:0.1.2'
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--振动页面-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--添加振动头部-->
+    <RelativeLayout
+        android:id="@+id/rl_addclock_bottom_vibrator_top"
+        style="@style/AddClockBottomTopStyle">
+        <Button
+            android:id="@+id/btn_addclock_music"
+            android:text="@string/music"
+            style="@style/AddClockBottomTopBackStyle" />
+        <TextView
+            style="@style/AddClockBottomTopTitleStyle"
+            android:text="@string/vibrator" />
+    </RelativeLayout>
+    <View
+        style="@style/AddClockBottomTopLineStyle"
+        android:id="@+id/view_addclockmusic"
+        android:layout_below="@+id/rl_addclock_bottom_vibrator_top" />
+
+    <TextView
+        android:id="@+id/tv_addclock_vibrator"
+        android:layout_below="@+id/rl_addclock_bottom_vibrator_top"
+        android:text="@string/standrad"
+        style="@style/AddClockBottomMusicTextStyle"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_addclock_vibrator"
+        style="@style/MWStyle"
+        android:layout_below="@+id/tv_addclock_vibrator">
+        <ListView
+            android:id="@+id/lv_addclock_vibrator"
+            style="@style/MWStyle"
+            android:background="@drawable/addclock_bg"
+            android:choiceMode="singleChoice"
+            android:divider="@null" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_addclock_vibrator_none"
+        style="@style/MWStyle"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/addclock_bg_selector">
+
+        <TextView
+            android:id="@+id/tv_vibrator_none"
+            android:text="@string/none"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            style="@style/AddClockPhoneMusicNoneStyle"/>
+        <CheckBox
+            android:id="@+id/cb_vibrator_none"
+            android:layout_alignParentRight="true"
+            style="@style/CheckBoxStyle"
+            android:paddingRight="20dp" />
+    </RelativeLayout>
+</LinearLayout>
