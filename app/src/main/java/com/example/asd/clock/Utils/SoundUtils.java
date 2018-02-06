@@ -60,6 +60,7 @@ public class SoundUtils {
             if (mMediaPlayer.isPlaying()) {
                 mMediaPlayer.stop();
                 mMediaPlayer.release();
+                mMediaPlayer = null;
             }
         }
     }

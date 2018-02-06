@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,6 +31,14 @@ public class WorldClockAdapter extends BaseAdapter{
         this.activity = activity;
         this.list = list;
     }
+
+    //刷新listview
+    public void updateListView(boolean isEdit) {
+        this.isEdit = isEdit;
+        Log.i("AdapterisEdit", String.valueOf(isEdit));
+        notifyDataSetChanged();
+    }
+
     //刷新listview
     public void updateListView(List<WorldClock> list, boolean isEdit) {
         this.list = list;
@@ -64,18 +71,18 @@ public class WorldClockAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(activity).inflate(R.layout.item_worldclock, null);
             viewHolder.tv_hours = (TextView) convertView.findViewById(R.id.tv_hours);
             viewHolder.tv_city_cn = (TextView) convertView.findViewById(R.id.tv_city_cn);
-            viewHolder.tv_lunch = (TextView) convertView.findViewById(R.id.tv_lunch);
+            viewHolder.tv_lunch_worldclock = (TextView) convertView.findViewById(R.id.tv_lunch_worldclock);
             viewHolder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
 
             //编辑状态需要用到的控件内容  实例化并存在viewholder中
             viewHolder.ll_item = (LinearLayout) convertView.findViewById(R.id.ll_item);
             viewHolder.ll_threeview = (LinearLayout) convertView.findViewById(R.id.ll_threeview);
-            viewHolder.btn_deleteWorldClock = (ImageButton) convertView.findViewById(R.id.delete_worldclock);
+            viewHolder.rl_delete_botton_worldclock = (RelativeLayout)convertView.findViewById(R.id.rl_delete_botton_worldclock);
             viewHolder.rl_item = (RelativeLayout) convertView.findViewById(R.id.rl_item);
             viewHolder.rl_content = (RelativeLayout) convertView.findViewById(R.id.rl_content);
             viewHolder.btn_delete = (Button) convertView.findViewById(R.id.btn_delete);
-            viewHolder.btn_delete.setTag(position);
 //            把viewholder存入到convertview中
+            viewHolder.btn_delete.setTag(position);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -84,26 +91,29 @@ public class WorldClockAdapter extends BaseAdapter{
         if (isEdit) {
             //编辑状态需要显示的控件
             viewHolder.ll_item.setPadding(60, 0, 0, 0);
-            viewHolder.btn_deleteWorldClock.setVisibility(View.VISIBLE);
             viewHolder.ll_threeview.setVisibility(View.VISIBLE);
+            viewHolder.rl_delete_botton_worldclock.setVisibility(View.VISIBLE);
+
             //为该item添加侦听事件
             right = viewHolder.btn_delete.getWidth() + viewHolder.rl_content.getPaddingRight();
-            viewHolder.btn_deleteWorldClock.setOnClickListener(new ListViewItemListener(position, viewHolder, right));
+            viewHolder.rl_delete_botton_worldclock.setOnClickListener(new ListViewItemListener(position, viewHolder, right));
             viewHolder.rl_content.setOnClickListener(new ListViewItemListener(position, viewHolder, right));
             viewHolder.ll_threeview.setOnClickListener(new ListViewItemListener(position, viewHolder));
 
+            viewHolder.rl_delete_botton_worldclock.setMinimumHeight(viewHolder.rl_item.getHeight());
+
             //编辑状态需要隐藏的按钮
-            viewHolder.tv_lunch.setVisibility(View.GONE);
+            viewHolder.tv_lunch_worldclock.setVisibility(View.GONE);
             viewHolder.tv_time.setVisibility(View.GONE);
         } else {
             //非编辑状态 隐藏控件内容
             viewHolder.ll_item.setPadding(0, 0, 0, 0);
-            viewHolder.btn_deleteWorldClock.setVisibility(View.GONE);
+            viewHolder.rl_delete_botton_worldclock.setVisibility(View.GONE);
             viewHolder.ll_threeview.setVisibility(View.GONE);
             viewHolder.btn_delete.setVisibility(View.GONE);
             viewHolder.rl_content.setPadding(40, 0, 0, 0);
             // 非编辑状态 显示文本控件
-            viewHolder.tv_lunch.setVisibility(View.VISIBLE);
+            viewHolder.tv_lunch_worldclock.setVisibility(View.VISIBLE);
             viewHolder.tv_time.setVisibility(View.VISIBLE);
         }
         //获取当前选中的item对象
@@ -127,9 +137,9 @@ public class WorldClockAdapter extends BaseAdapter{
         }
         //上下午
         if (currentHour >= 0 && currentHour < 12 || currentHour >= 24 || currentHour < -12) {
-            viewHolder.tv_lunch.setText("上午");
+            viewHolder.tv_lunch_worldclock.setText("上午");
         } else {
-            viewHolder.tv_lunch.setText("下午");
+            viewHolder.tv_lunch_worldclock.setText("下午");
         }
         //显示时间
         while (currentHour > 12) currentHour = currentHour - 12;
@@ -196,7 +206,7 @@ public class WorldClockAdapter extends BaseAdapter{
                    }
                    break;
                 //弹出删除按钮的按钮
-                case R.id.delete_worldclock:
+                case R.id.rl_delete_botton_worldclock:
                     Utils.showToast(activity, list.get(position).getCity_cn());
                     viewHolder.rl_content.setPadding(-100, viewHolder.rl_content.getPaddingTop(), right, viewHolder.rl_content.getPaddingBottom());
 
@@ -215,9 +225,9 @@ public class WorldClockAdapter extends BaseAdapter{
     class ViewHolder {
         TextView tv_city_cn;
         TextView tv_hours;
-        TextView tv_lunch;
+        TextView tv_lunch_worldclock;
         TextView tv_time;
-        ImageButton btn_deleteWorldClock;
+        RelativeLayout rl_delete_botton_worldclock;
         LinearLayout ll_item;
         LinearLayout ll_threeview;
         RelativeLayout rl_content;

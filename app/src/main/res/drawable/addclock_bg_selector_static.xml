@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--不点击不划线 view来划线-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+   <!-- <item android:state_pressed="false">
+        <layer-list>
+            <item android:left="-2dp" android:right="-2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/colorDark" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>-->
+    <item android:drawable="@color/colorSimpleDark" android:state_pressed="true"/>
+    <item android:drawable="@color/colorDark"/>
+   <!-- <item android:state_pressed="true">
+       &lt;!&ndash; <layer-list>
+            <item android:left="-2dp" android:right="-2dp">&ndash;&gt;
+                <shape android:shape="rectangle">
+                    &lt;!&ndash;填充颜色&ndash;&gt;
+                    <solid android:color="@color/colorSimpleDark" />
+                    &lt;!&ndash;描边&ndash;&gt;
+&lt;!&ndash;
+                    <stroke android:width="1dp" android:color="@color/colorSimpleDark" />
+&ndash;&gt;
+                </shape>
+           &lt;!&ndash; </item>
+        </layer-list>&ndash;&gt;
+    </item>
+    <item android:state_pressed="false">
+        &lt;!&ndash; <layer-list>
+             <item android:left="-2dp" android:right="-2dp">&ndash;&gt;
+        <shape android:shape="rectangle">
+            &lt;!&ndash;填充颜色&ndash;&gt;
+            <solid android:color="@color/colorDark" />
+            &lt;!&ndash;描边&ndash;&gt;
+            &lt;!&ndash;
+                                <stroke android:width="1dp" android:color="@color/colorSimpleDark" />
+            &ndash;&gt;
+        </shape>
+        &lt;!&ndash; </item>
+     </layer-list>&ndash;&gt;
+    </item>-->
+</selector>

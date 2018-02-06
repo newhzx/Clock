@@ -150,6 +150,7 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_centerVertical">true</item>
+        <item name="android:checked">true</item>
     </style>
 
     <style name="AddClockPhoneMusicNoneStyle" parent="MWStyle">
@@ -158,4 +159,40 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <style name="ItemClockRelative" parent="MWStyle">
+        <item name="android:background">@drawable/addclock_bg_bottom</item>
+    </style>
+
+    <style name="ItemClockImageView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:src">@drawable/delete_worldclock_icon</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="LinearVertical" parent="WWStyle">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="LinearHorizontal" parent="WWStyle">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ItemClockTextViewStyle" parent="WWStyle">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="ItemDeleteBottonStyle">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@color/colorRed</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:text">@string/delete</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:visibility">gone</item>
+    </style>
 </resources>

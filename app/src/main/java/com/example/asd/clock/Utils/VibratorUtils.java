@@ -6,13 +6,6 @@ import android.os.Vibrator;
 
 public class VibratorUtils {
     private static Vibrator vib;
-    //震动milliseconds毫秒
-    public static void vibrate(final Activity activity, long milliseconds) {
-        if(vib == null){
-            vib = (Vibrator) activity.getSystemService(Service.VIBRATOR_SERVICE);
-        }
-        vib.vibrate(milliseconds);
-    }
     //以pattern[]方式震动
     public static void vibrate(final Activity activity, long[] pattern,int repeat){
         if(vib == null){
@@ -26,5 +19,6 @@ public class VibratorUtils {
             vib = (Vibrator) activity.getSystemService(Service.VIBRATOR_SERVICE);
         }
         vib.cancel();
+        vib = null;
     }
 }

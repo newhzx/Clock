@@ -7,6 +7,8 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -14,26 +16,38 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.asd.clock.Clock.SwitchButton.SwitchButton;
+import com.example.asd.clock.Fragment.Bean.Clock;
 import com.example.asd.clock.R;
+import com.example.asd.clock.Utils.ClockXMLUtils;
 import com.example.asd.clock.Utils.InitClockData;
 import com.example.asd.clock.Utils.SoundUtils;
 import com.example.asd.clock.Utils.Utils;
 import com.weigan.loopview.LoopView;
 import com.weigan.loopview.OnItemSelectedListener;
 
+import org.dom4j.DocumentException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AddClock extends AppCompatActivity {
     private SoundPool soundPool;//声音池
-    private Button cancel, add;//取消和添加按钮
+    private Button cancel, add,btn_delete_addclock;//取消和添加按钮
     private List<String> list, listLunch, listHour, listMinute;//时间滚轮集合
     private LoopView loopViewline, loopViewlines, loopViewLunch, loopViewHour, loopViewMinute;//时间滚轮
     private SwitchButton mSB;//开关 稍后提醒
     private RelativeLayout rl_repeat, rl_tag, rl_tips, rl_music;//选择栏
     private TextView tv_repeat, tv_tag, tv_music;//显示栏——重复,标签，铃声
-
+    private Clock clock;
+    private boolean isEdit;
+    private Intent intent;
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addclock);
@@ -42,8 +56,48 @@ public class AddClock extends AppCompatActivity {
         soundPool.load(AddClock.this, R.raw.collide, 1);
         soundPool.play(1, 1, 1, 0, 0, 2);
         initView();//初始化控件
-        initData();//初始化数据
+        initLoopView();
+        intent = getIntent();
+        isEdit = intent.getBooleanExtra("isEdit",false);
+        clock = (Clock) intent.getSerializableExtra("json");
+        if (isEdit){
+            readData(clock);
+        }else{
+            initData();//初始化数据
+        }
         initListener();//初始化侦听事件
+    }
+
+    private void readData(final Clock clock) {
+        Log.i("clocks",clock.getId()+"");
+        loopViewLunch.setCurrentPosition(clock.getLunchSelect());
+        int hourSelect = clock.getHourSelect();
+        Log.i("hourSelect",hourSelect+"");
+        loopViewHour.setCurrentPosition(hourSelect);//初始化时位置
+        loopViewMinute.setCurrentPosition(clock.getMinuteSelect());//初始化分位置
+
+        Map<Integer,Boolean> map = Utils.getRepeat(clock.getJson());
+        String clockRepeat = Utils.getRepeatContent(map);
+        AddClockRepeatAdapter.setSelector(map);
+        if("".equals(clockRepeat)) clockRepeat = "永不";
+        tv_repeat.setText(clockRepeat);
+
+        AddClockTag.setTags(clock.getTags());
+        tv_tag.setText(clock.getTags());
+
+        btn_delete_addclock.setVisibility(View.VISIBLE);
+        btn_delete_addclock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int removeId = clock.getId();
+                removeItem(removeId);
+                setResult(20);
+                finish();
+            }
+        });
+    }
+    private void removeItem(int id) {
+        ClockXMLUtils.removeNoteInXML(id);
     }
 
     private void initListener() {
@@ -86,6 +140,8 @@ public class AddClock extends AppCompatActivity {
         tv_repeat = (TextView) findViewById(R.id.tv_repeat);
         tv_tag = (TextView) findViewById(R.id.tv_tag);
         tv_music = (TextView) findViewById(R.id.tv_music);
+
+        btn_delete_addclock = (Button)findViewById(R.id.btn_delete_addclock);
     }
 
     private void initColorAndLine() {
@@ -108,8 +164,7 @@ public class AddClock extends AppCompatActivity {
         loopViewMinute.setCenterTextColor(Color.parseColor("#ffffff"));
         loopViewMinute.setTextSize(18);
     }
-
-    private void initData() {
+    private  void initLoopView(){
         //滚轮上下午—时—分—集合初始化
         list = new ArrayList<String>();
         listLunch = new ArrayList<String>();
@@ -128,7 +183,8 @@ public class AddClock extends AppCompatActivity {
         loopViewHour.setItems(listHour);
         loopViewMinute.setItems(listMinute);
         loopViewlines.setItems(list);
-
+    }
+    private void initData() {
         //设置初始化位置
         Calendar calendar = Calendar.getInstance();//时钟类
         int hour = calendar.get(Calendar.HOUR_OF_DAY);//时
@@ -183,7 +239,10 @@ public class AddClock extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.add:
-                    //存储数据
+                    if(isEdit){
+                        removeItem(clock.getId());
+                    }
+                    addClock();
                     break;
                 case R.id.rl_addclock_bottom_repeat:
                     //点击重复回调方法
@@ -200,6 +259,63 @@ public class AddClock extends AppCompatActivity {
             }
         }
     }
+    private void addClock(){
+        //存储数据
+        try {
+            addClockToXml();
+            //初始化重复选项
+            AddClockRepeatAdapter.setSelector(AddClockRepeatAdapter.initMap());
+            //设置闹钟初始化
+            AddClockTag.setTags("闹钟");
+            setResult(20);
+            finish();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void addClockToXml() throws JSONException, IOException, DocumentException {
+        int lunchSelect = loopViewLunch.getSelectedItem();
+        int hourSelect = loopViewHour.getSelectedItem();
+        int minuteSelect = loopViewMinute.getSelectedItem();
+        Calendar calendar = Calendar.getInstance();//获取系统时钟类
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);//时
+        int minute = calendar.get(Calendar.MINUTE);//分
+        int second = calendar.get(Calendar.SECOND);//秒
+        int lunch = 0;
+        if (hour < 12) {
+            lunch = 0;
+        } else if (11 < hour && hour < 24) {
+            lunch = 1;
+        }
+        while (hour >= 12) hour = hour - 12;
+        if(minute!=minuteSelect||lunch!=lunchSelect||hour!=hourSelect){
+            second = 0;
+        }
+        //id的参数
+        int id;String hours = hourSelect+"",minutes = minuteSelect+"",seconds = second+"";
+        if (hourSelect<10) hours = "0"+hourSelect;
+        if(minuteSelect<10) minutes = "0"+minuteSelect;
+        if(second<10) seconds = "0"+second;
+        id = Integer.valueOf(lunchSelect+""+hours+""+minutes+""+seconds);
+        String tags = AddClockTag.tags;
+        String json = map2Json(AddClockRepeatAdapter.getSelected()).toString();
+        System.out.println(id+"!"+lunch+"!"+hour+"!"+minute+"!"+second+"!"+tags+"!"+json);
+        ClockXMLUtils.addNoteToClockXML(id,lunchSelect,hourSelect,minuteSelect,second,tags,json);
+    }
+    public static JSONObject map2Json(Map<Integer,Boolean> map) throws JSONException {
+        JSONObject json = new JSONObject();
+        Set<Integer> set = map.keySet();
+        for (Iterator<Integer> it = set.iterator(); it.hasNext();) {
+            Integer key = it.next();
+            json.put(String.valueOf(key),Boolean.valueOf(map.get(key)));
+        }
+        return json;
+    }
+
     //侦听开关选项按钮
     class OnCheckChange implements CompoundButton.OnCheckedChangeListener {
         @Override
@@ -210,5 +326,20 @@ public class AddClock extends AppCompatActivity {
                 Utils.showToast(AddClock.this, "false");
             }
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
+            //初始化重复选项
+            AddClockRepeatAdapter.setSelector(AddClockRepeatAdapter.initMap());
+            //设置闹钟初始化
+            AddClockTag.setTags("闹钟");
+            finish();
+            return false;
+        } else if (keyCode == KeyEvent.KEYCODE_MENU) {
+
+        } else if (keyCode == KeyEvent.KEYCODE_HOME) {
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

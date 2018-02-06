@@ -49,6 +49,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_addclock_loopview" />
     <View
+        android:id="@+id/view_addclock_bottom"
         style="@style/AddClockBottomTopLineStyle"
         android:layout_below="@+id/addclock_bottom" />
+
+    <Button
+        android:layout_below="@+id/view_addclock_bottom"
+        android:id="@+id/btn_delete_addclock"
+        android:layout_marginTop="40dp"
+        android:textSize="16dp"
+        android:text="删除闹钟"
+        android:textColor="@color/colorRed"
+        android:visibility="gone"
+        android:background="@drawable/addclock_bg_selector"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </Button>
 </RelativeLayout>

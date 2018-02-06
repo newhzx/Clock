@@ -1,9 +1,9 @@
 package com.example.asd.clock;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //选项跳转页面
     private void selectView(int i) {
-        FragmentManager manager = getSupportFragmentManager();
+        FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         hideFragments(transaction);
         switch (i) {

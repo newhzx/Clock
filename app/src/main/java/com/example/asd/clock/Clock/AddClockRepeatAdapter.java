@@ -13,19 +13,19 @@ import com.example.asd.clock.Utils.Global;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddClockRepeatAdapter extends BaseAdapter {
     public static List list;
     private Activity activity;
-    private static HashMap<Integer,Boolean> map = null;
+    private static Map<Integer,Boolean> map = initMap();
     //如果没有初始化，需要手动初始化map
     public AddClockRepeatAdapter(List list, Activity activity) {
         this.list = list;
-        this.activity = activity;
         this.map = initMap();
     }
     //已经初始化 直接传参过来 不需要再次初始化
-    public AddClockRepeatAdapter(List list, Activity activity,HashMap<Integer, Boolean> map) {
+    public AddClockRepeatAdapter(List list, Activity activity,Map<Integer, Boolean> map) {
         this.list = list;
         this.activity = activity;
         this.map = map;
@@ -64,17 +64,17 @@ public class AddClockRepeatAdapter extends BaseAdapter {
         return  convertView;
     }
     //返回map集合
-    public static HashMap<Integer,Boolean> getSelected(){
+    public static Map<Integer,Boolean> getSelected(){
         return map;
     }
 
     //设置setter adapter
-    public static void setSelector(HashMap<Integer,Boolean> map){
+    public static void setSelector(Map<Integer,Boolean> map){
         AddClockRepeatAdapter.map = map;
     }
 
     //初始化map集合,所有选项为false
-    public static HashMap<Integer, Boolean> initMap() {
+    public static Map<Integer, Boolean> initMap() {
         map = new HashMap<Integer, Boolean>();
         for (int i = 0; i< Global.getWeekRepeat.length; i++){
             map.put(i,false);

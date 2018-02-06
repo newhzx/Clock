@@ -1,15 +1,10 @@
 package com.example.asd.clock.Fragment.Bean;
 
-/**
- * Created by asd on 2018/1/6.
- */
-
 //WorldClock载体
 public class WorldClock {
     private String city_en;
     private String city_cn;
     private String hours;
-
     public void setCity_en(String city_en) {
         this.city_en = city_en;
     }

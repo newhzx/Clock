@@ -60,7 +60,7 @@ public class WorldClockFragment extends BaseFragment{
     };
     //刷新界面方法
     private void refreshUI() throws IOException, DocumentException {
-        adapter.notifyDataSetChanged();
+        adapter.updateListView(isEdit);
     }
     //线程类
     private Runnable mRunnable = new Runnable() {
@@ -105,6 +105,7 @@ public class WorldClockFragment extends BaseFragment{
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Utils.showToast(activity,"worldclock");
                 isEdit = !isEdit;//取反
                 //设置当前状态
                 dlv_workclock.setIsDragAndDrop(isEdit);
@@ -113,9 +114,6 @@ public class WorldClockFragment extends BaseFragment{
                 } else {
                     edit.setText("编辑");
                     if (Utils.getList() != null) {
-                        /*for (int i = 0; i < Utils.getList().size(); i++) {
-                            Log.i("rootList", Utils.getList().get(i).getCity_cn());
-                        }*/
                         try {
                             //重写list集合 实现重新排序效果
                             XMLUtils.overwriteNotesToXml(Utils.getList());

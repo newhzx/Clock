@@ -15,8 +15,9 @@ import com.example.asd.clock.R;
 import com.example.asd.clock.Utils.Global;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 public class AddClockRepeat extends Activity implements OnItemClickListener {
     private ListView lv_repeat;//重复listview
     private Button btn_addclockrepeat;//返回按钮
@@ -24,7 +25,7 @@ public class AddClockRepeat extends Activity implements OnItemClickListener {
     public int currentNum = 0;//当前选项的位置
     private int count = 0;//
     private AddClockRepeatAdapter adapter;//重复的adapter
-    private HashMap<Integer, Boolean> map;//记录选中的位置
+    private Map<Integer, Boolean> map;//记录选中的位置
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addclockrepeat);
@@ -63,7 +64,7 @@ public class AddClockRepeat extends Activity implements OnItemClickListener {
     }
 
     private String getRepeatContent() {
-        HashMap<Integer, Boolean> map = AddClockRepeatAdapter.getSelected();
+        Map<Integer, Boolean> map = AddClockRepeatAdapter.getSelected();
         StringBuffer sb = new StringBuffer();
         if (currentNum == 0) {
             return "永久";

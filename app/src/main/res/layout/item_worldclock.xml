@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--世界时钟item  怎么个item目录-->
+<!--世界时钟item  item目录-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_item"
     android:layout_width="match_parent"
@@ -7,58 +7,53 @@
     android:descendantFocusability="blocksDescendants">
     <!--分层布局 除去删除按钮-->
     <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_delete_botton_worldclock"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_width="40dp"
+        android:descendantFocusability="blocksDescendants">
+        <!--弹出删除按钮的Button-->
+        <ImageView
+            android:focusable="false"
+            style="@style/ItemClockImageView"/>
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/rl_content"
+        android:background="@drawable/addclock_bg_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp">
-        //弹出删除按钮的Button
-        <ImageButton
-            android:id="@+id/delete_worldclock"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:gravity="center"
-            android:src="@drawable/delete_worldclock_icon"
-            android:visibility="gone" />
+        android:layout_height="match_parent">
         <!--时间以及时间差-->
         <LinearLayout
             android:id="@+id/ll_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LinearVertical"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp">
             <TextView
                 android:id="@+id/tv_hours"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/WWStyle"
                 android:text="今天,-13小时"
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/tv_city_cn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/WWStyle"
                 android:text="澳门"
                 android:textSize="28dp" />
         </LinearLayout>
         <!--时间以及上下午-->
         <TextView
-            android:id="@+id/tv_lunch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_lunch_worldclock"
+            style="@style/WWStyle"
             android:layout_alignBottom="@+id/ll_item"
             android:layout_toLeftOf="@+id/tv_time"
             android:text="上午"
             android:textSize="30dp" />
-
         <TextView
             android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/WWStyle"
             android:layout_alignBottom="@+id/ll_item"
             android:layout_alignParentRight="true"
             android:layout_toLeftOf="@+id/ll_threeview"
@@ -87,13 +82,5 @@
     <!--删除世界时钟按钮-->
     <Button
         android:id="@+id/btn_delete"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:background="@color/colorRed"
-        android:paddingRight="0dp"
-        android:text="删除"
-        android:textColor="@color/colorWhite"
-        android:textSize="15dp"
-        android:visibility="gone" />
+        style="@style/ItemDeleteBottonStyle"/>
 </RelativeLayout>

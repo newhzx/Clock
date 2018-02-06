@@ -35,7 +35,7 @@ public class XMLUtils {
     }
     //读取指定文件的节点 返回list集合
     public static List<WorldClock> readWorldClock() throws DocumentException, IOException {
-        File file = Utils.isNotExistCreateFile("citytime.xml");
+        File file = Utils.isNotExistCreateFile("citytime.xml","citys");
         SAXReader sax = new SAXReader();//创建一个SAXReader对象
         Document document = sax.read(file);//获取document对象,如果文档无节点，则会抛出Exception提前结束
         Element root = document.getRootElement();//获取根节点
@@ -124,7 +124,7 @@ public class XMLUtils {
     }
     //添加节点到xml文件中
     public static void addNoteToXML(String city_en, String city_cn, String hours) throws IOException, DocumentException {
-        File file = Utils.isNotExistCreateFile("citytime.xml");
+        File file = Utils.isNotExistCreateFile("citytime.xml","citys");
         //判断该节点是否存在于xml中
         if (selectNoteInXML(city_en)) {
             Log.i("selectNoteInXML",selectNoteInXML(city_en)+"");
@@ -143,7 +143,7 @@ public class XMLUtils {
     }
     //重写xml文件  重新排列节点的顺序
     public static void overwriteNotesToXml(List<WorldClock> list) throws IOException, DocumentException {
-        File file = Utils.isNotExistCreateFile("citytime.xml");
+        File file = Utils.isNotExistCreateFile("citytime.xml","citys");
         SAXReader reader = new SAXReader();
         Document doc = reader.read(new FileInputStream(file));
         //首先清空xml的所有city节点 然后重新写入

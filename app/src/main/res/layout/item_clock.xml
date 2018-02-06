@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_item_clock"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/addclock_bg_selector_static">
+
+    <!--弹出删除按钮的Button-->
+    <RelativeLayout
+        android:id="@+id/rl_delete_item_clock"
+        android:focusable="false"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_delete_item_clock"
+            style="@style/ItemClockImageView"
+            android:focusable="false" />
+    </RelativeLayout>
+    <!--分层布局 除去删除按钮-->
+    <RelativeLayout
+        android:id="@+id/rl_content_clock"
+        style="@style/ItemClockRelative"
+        android:layout_marginLeft="20dp">
+        <LinearLayout
+            android:id="@+id/ll_content_clock"
+            style="@style/LinearVertical"
+            android:layout_alignParentLeft="true">
+
+            <LinearLayout
+                android:id="@+id/ll_content_item_clock"
+                style="@style/LinearHorizontal">
+
+                <TextView
+                    android:id="@+id/tv_lunch_clock"
+                    style="@style/ItemClockTextViewStyle"
+                    android:text="@string/lunch"
+                    android:textSize="28dp" />
+
+                <TextView
+                    android:id="@+id/tv_clocktime_clock"
+                    style="@style/ItemClockTextViewStyle"
+                    android:text="12:00"
+                    android:textSize="52dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_tagAndjson_clock"
+                style="@style/ItemClockTextViewStyle"
+                android:layout_marginBottom="15dp"
+                android:text="@string/clock"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_row_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text=">"
+            android:textColor="@color/colorSimpleDark"
+            android:textSize="25dp"
+            android:visibility="gone"></TextView>
+
+        <com.example.asd.clock.Clock.SwitchButton.SwitchButton
+            android:id="@+id/sb_clock"
+            style="@style/AddClockBottomSwitchStyle"
+            app:kswBackDrawable="@drawable/ios_back_drawable"
+            app:kswThumbDrawable="@drawable/ios_thumb_selector" />
+    </RelativeLayout>
+    <!--删除时钟按钮-->
+    <Button
+        android:id="@+id/btn_deleteButton_clock"
+        style="@style/ItemDeleteBottonStyle"
+        android:focusable="false" />
+</RelativeLayout>
