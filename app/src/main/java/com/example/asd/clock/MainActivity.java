@@ -1,15 +1,16 @@
 package com.example.asd.clock;
 
-import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.asd.clock.Fragment.Adapter.ClockAdapter;
 import com.example.asd.clock.Fragment.ClockFragment;
 import com.example.asd.clock.Fragment.StopWatchFragment;
 import com.example.asd.clock.Fragment.TimerFragment;
@@ -57,8 +58,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        selectView(0);
+        selectView(3);
     }
+
+ /*   @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        ClockAdapter.List2String(ClockAdapter.listChoose);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        ClockAdapter.initSwitch();
+    }*/
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ClockAdapter.List2String(ClockAdapter.listChoose,MainActivity.this);
+       /* try {
+            ClockAdapter.correctIdBool();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }*/
+    }
+
     //监听事件
     @OnClick({R.id.ll_stopwatch, R.id.ll_clock, R.id.ll_timer, R.id.ll_worldclock})
     public void onClick(View v) {

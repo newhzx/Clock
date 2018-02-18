@@ -8,19 +8,22 @@
     <!--分层布局 除去删除按钮-->
     <RelativeLayout
         android:visibility="gone"
+        android:focusable="false"
         android:id="@+id/rl_delete_botton_worldclock"
         android:layout_centerVertical="true"
         android:gravity="center_horizontal"
         android:layout_height="match_parent"
-        android:layout_width="40dp"
-        android:descendantFocusability="blocksDescendants">
+        android:layout_width="40dp">
         <!--弹出删除按钮的Button-->
         <ImageView
             android:focusable="false"
+            android:id="@+id/iv_delete_item_worldclock"
             style="@style/ItemClockImageView"/>
     </RelativeLayout>
     <RelativeLayout
+        android:focusable="false"
         android:id="@+id/rl_content"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/addclock_bg_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -63,24 +66,21 @@
         <!--三条白线作为按钮 可以拖动控件-->
         <LinearLayout
             android:id="@+id/ll_threeview"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ll_item"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:orientation="vertical"
             android:paddingRight="20dp"
             android:visibility="gone">
-
             <include layout="@layout/viewwhiteline" />
-
             <include layout="@layout/viewwhiteline" />
-
             <include layout="@layout/viewwhiteline" />
         </LinearLayout>
     </RelativeLayout>
     <!--删除世界时钟按钮-->
     <Button
         android:id="@+id/btn_delete"
+        android:focusable="false"
         style="@style/ItemDeleteBottonStyle"/>
 </RelativeLayout>

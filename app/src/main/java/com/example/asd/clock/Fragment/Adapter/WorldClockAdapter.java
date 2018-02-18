@@ -7,31 +7,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.asd.clock.Fragment.Bean.WorldClock;
 import com.example.asd.clock.R;
 import com.example.asd.clock.Utils.Utils;
-import com.example.asd.clock.Utils.XMLUtils;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 //世界时钟适配器
 public class WorldClockAdapter extends BaseAdapter{
     private int right;//离右侧的距离
     private Activity activity;//
-    private List<WorldClock> list;//世界时钟list集合
+    private RelativeLayout.LayoutParams lp;
+    public static ViewGroup parent;
+    private static List<WorldClock> list;//世界时钟list集合
     private boolean isEdit = false;//是否编辑状态
+    private static HashMap<Integer,Boolean> isCitySelect = new HashMap<Integer,Boolean>();
 //    初始化界面
     public WorldClockAdapter(Activity activity, List<WorldClock> list) {
         this.activity = activity;
         this.list = list;
+        initData();
     }
-
+    public static void initData() {
+        isCitySelect.clear();
+        for (int i = 0; i < list.size(); i++) {
+            isCitySelect.put(i, false);
+        }
+    }
     //刷新listview
     public void updateListView(boolean isEdit) {
         this.isEdit = isEdit;
@@ -39,11 +48,20 @@ public class WorldClockAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }
 
+    public static HashMap<Integer,Boolean> getCitySelect() {
+        return isCitySelect;
+    }
+
+    public static void setCitySelect(HashMap<Integer, Boolean> isCitySelect) {
+        WorldClockAdapter.isCitySelect = isCitySelect;
+    }
+
     //刷新listview
     public void updateListView(List<WorldClock> list, boolean isEdit) {
         this.list = list;
         this.isEdit = isEdit;
         Log.i("AdapterisEdit", String.valueOf(isEdit));
+        WorldClockAdapter.initData();
         notifyDataSetChanged();
     }
 
@@ -64,6 +82,7 @@ public class WorldClockAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        this.parent = parent;
         ViewHolder viewHolder = null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -81,24 +100,27 @@ public class WorldClockAdapter extends BaseAdapter{
             viewHolder.rl_item = (RelativeLayout) convertView.findViewById(R.id.rl_item);
             viewHolder.rl_content = (RelativeLayout) convertView.findViewById(R.id.rl_content);
             viewHolder.btn_delete = (Button) convertView.findViewById(R.id.btn_delete);
+            viewHolder.iv_delete_item_worldclock = (ImageView) convertView.findViewById(R.id.iv_delete_item_worldclock);
 //            把viewholder存入到convertview中
-            viewHolder.btn_delete.setTag(position);
+//            viewHolder.btn_delete.setTag(position);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        lp = new RelativeLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
         //编辑状态中
         if (isEdit) {
             //编辑状态需要显示的控件
-            viewHolder.ll_item.setPadding(60, 0, 0, 0);
+            viewHolder.ll_item.setPadding(0, 0, 0, 0);
             viewHolder.ll_threeview.setVisibility(View.VISIBLE);
             viewHolder.rl_delete_botton_worldclock.setVisibility(View.VISIBLE);
-
-            //为该item添加侦听事件
-            right = viewHolder.btn_delete.getWidth() + viewHolder.rl_content.getPaddingRight();
-            viewHolder.rl_delete_botton_worldclock.setOnClickListener(new ListViewItemListener(position, viewHolder, right));
-            viewHolder.rl_content.setOnClickListener(new ListViewItemListener(position, viewHolder, right));
-            viewHolder.ll_threeview.setOnClickListener(new ListViewItemListener(position, viewHolder));
+            lp.setMargins(120, 0, 10, 0);
+            viewHolder.rl_content.setLayoutParams(lp);
+            viewHolder.iv_delete_item_worldclock.setMinimumHeight(viewHolder.rl_content.getHeight());
 
             viewHolder.rl_delete_botton_worldclock.setMinimumHeight(viewHolder.rl_item.getHeight());
 
@@ -108,10 +130,13 @@ public class WorldClockAdapter extends BaseAdapter{
         } else {
             //非编辑状态 隐藏控件内容
             viewHolder.ll_item.setPadding(0, 0, 0, 0);
+            lp.setMargins(40, 0, 10, 0);
+            viewHolder.rl_content.setLayoutParams(lp);
+
             viewHolder.rl_delete_botton_worldclock.setVisibility(View.GONE);
             viewHolder.ll_threeview.setVisibility(View.GONE);
             viewHolder.btn_delete.setVisibility(View.GONE);
-            viewHolder.rl_content.setPadding(40, 0, 0, 0);
+            viewHolder.rl_content.setPadding(0, 0, 0, 0);
             // 非编辑状态 显示文本控件
             viewHolder.tv_lunch_worldclock.setVisibility(View.VISIBLE);
             viewHolder.tv_time.setVisibility(View.VISIBLE);
@@ -149,6 +174,29 @@ public class WorldClockAdapter extends BaseAdapter{
         } else {
             viewHolder.tv_time.setText(currentHour + ":" + minute);
         }
+
+        final View finalConvertView = convertView;
+        viewHolder.rl_delete_botton_worldclock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClicksListener.onClicks(finalConvertView, position, list);
+            }
+        });
+
+        if (getCitySelect().get(position)) {
+            viewHolder.rl_item.setPadding(-120, viewHolder.rl_content.getPaddingTop(), right, viewHolder.rl_content.getPaddingBottom());
+
+            viewHolder.btn_delete.setPadding(0, 0, 0, 0);
+            viewHolder.btn_delete.setVisibility(View.VISIBLE);
+            viewHolder.btn_delete.setHeight(viewHolder.rl_content.getHeight());
+        } else {
+            viewHolder.rl_item.setPadding(0, viewHolder.rl_content.getPaddingTop(), right, viewHolder.rl_content.getPaddingBottom());
+            viewHolder.rl_content.setPadding(0, 0, 0, 0);
+            //退出删除按钮
+            viewHolder.btn_delete.setPadding(0, 0, 0, 0);
+            viewHolder.btn_delete.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
     //交换位置方法
@@ -159,16 +207,32 @@ public class WorldClockAdapter extends BaseAdapter{
         if (start == end) return;
         Utils.setList(list);
     }
-    //删除某个节点
-    private void removeItem(String city_en) {
-        XMLUtils.removeNoteToXML(city_en);
+
+    public interface onItemClicksListener {
+        void onClicks(View view, int position, List<WorldClock> list);
+    }
+    private onItemClicksListener mOnItemClicksListener;
+
+    public void setOnItemClicksListener(onItemClicksListener mOnItemClicksListener) {
+        this.mOnItemClicksListener = mOnItemClicksListener;
     }
 
-    //注册事件所实例化的class类 实现按钮的效果
+    public static void initDeleteButton() {
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View view = parent.getChildAt(i);
+            Button btn_delete = view.findViewById(R.id.btn_delete);
+            RelativeLayout rl_item = view.findViewById(R.id.rl_item);
+
+            btn_delete.setVisibility(View.GONE);
+            rl_item.setPadding(0, 0, 0, 0);
+        }
+    }
+   /* //注册事件所实例化的class类 实现按钮的效果
     class ListViewItemListener implements View.OnClickListener {
         int position;
         ViewHolder viewHolder;
         int right;
+        public ListViewItemListener(){}
         //注册事件构造方法
         public ListViewItemListener(int position, ViewHolder viewHolder) {
             this.position = position;
@@ -220,7 +284,7 @@ public class WorldClockAdapter extends BaseAdapter{
                     break;
             }
         }
-    }
+    }*/
 //   内部类
     class ViewHolder {
         TextView tv_city_cn;
@@ -233,5 +297,6 @@ public class WorldClockAdapter extends BaseAdapter{
         RelativeLayout rl_content;
         Button btn_delete;
         RelativeLayout rl_item;
+        ImageView iv_delete_item_worldclock;
     }
 }

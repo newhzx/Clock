@@ -1,10 +1,14 @@
 package com.example.asd.clock.Clock;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,9 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.asd.clock.Clock.SwitchButton.SwitchButton;
+import com.example.asd.clock.Fragment.Adapter.ClockAdapter;
 import com.example.asd.clock.Fragment.Bean.Clock;
 import com.example.asd.clock.R;
 import com.example.asd.clock.Utils.ClockXMLUtils;
+import com.example.asd.clock.Utils.Global;
 import com.example.asd.clock.Utils.InitClockData;
 import com.example.asd.clock.Utils.SoundUtils;
 import com.example.asd.clock.Utils.Utils;
@@ -37,6 +43,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static com.example.asd.clock.Fragment.Adapter.ClockAdapter.activity;
+
 public class AddClock extends AppCompatActivity {
     private SoundPool soundPool;//声音池
     private Button cancel, add,btn_delete_addclock;//取消和添加按钮
@@ -48,6 +56,8 @@ public class AddClock extends AppCompatActivity {
     private Clock clock;
     private boolean isEdit;
     private Intent intent;
+    private int position;
+    private AlarmManager alarmManager;
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addclock);
@@ -60,6 +70,7 @@ public class AddClock extends AppCompatActivity {
         intent = getIntent();
         isEdit = intent.getBooleanExtra("isEdit",false);
         clock = (Clock) intent.getSerializableExtra("json");
+        position = intent.getIntExtra("position",0);
         if (isEdit){
             readData(clock);
         }else{
@@ -91,6 +102,14 @@ public class AddClock extends AppCompatActivity {
             public void onClick(View v) {
                 int removeId = clock.getId();
                 removeItem(removeId);
+                ClockAdapter.listChoose.remove(position);
+                try {
+                    new ClockAdapter().initSwitch(ClockAdapter.listChoose);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                }
                 setResult(20);
                 finish();
             }
@@ -304,7 +323,38 @@ public class AddClock extends AppCompatActivity {
         String tags = AddClockTag.tags;
         String json = map2Json(AddClockRepeatAdapter.getSelected()).toString();
         System.out.println(id+"!"+lunch+"!"+hour+"!"+minute+"!"+second+"!"+tags+"!"+json);
-        ClockXMLUtils.addNoteToClockXML(id,lunchSelect,hourSelect,minuteSelect,second,tags,json);
+        int index = ClockXMLUtils.addNoteToClockXML(id,lunchSelect,hourSelect,minuteSelect,second,tags,json);
+        if(index == -1){
+            Utils.showToast(AddClock.this,"该闹钟已经存在");
+            return;
+        }
+        ClockAdapter.listChoose.add(index,Boolean.TRUE);
+        new ClockAdapter().initSwitch(ClockAdapter.listChoose);
+
+        if(alarmManager==null){
+            alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        }
+        Intent intent = new Intent(activity,AlarmClockReceiver.class);
+        intent.setAction(Global.Action+"."+id);//设置action 区别别的广播
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        long firstTime = SystemClock.elapsedRealtime();
+        long systemTime = System.currentTimeMillis();//系统时间
+        Calendar c = Calendar.getInstance();
+        // 根据用户选择时间来设置Calendar对象
+        c.set(Calendar.HOUR_OF_DAY, hour);
+        c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, second);
+        Log.i("AlarmTest",hour+":"+minute+":"+second);
+        // 设置AlarmManager将在Calendar对应的时间启动指定组件
+        long alarmTime = c.getTimeInMillis();
+        if (systemTime > alarmTime){
+            c.add(Calendar.DAY_OF_YEAR,1);
+            alarmTime =c.getTimeInMillis();
+        }
+        long time = alarmTime - systemTime;
+        firstTime+= time;
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                firstTime, pendingIntent);
     }
     public static JSONObject map2Json(Map<Integer,Boolean> map) throws JSONException {
         JSONObject json = new JSONObject();

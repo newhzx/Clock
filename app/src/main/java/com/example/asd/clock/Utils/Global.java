@@ -17,4 +17,9 @@ public class Global {
     public final static String[] getVibrator = {"提醒(默认)","断奏","快速","心跳","轻重音"};
     //振动的参数
     public final static long[][] getVibratorList = {{300L, 2000L},{500L, 500L},{200L, 1000L},{300L,300L},{100L,100L,100L,1500L}};
+    //行动的包名作为广播action的一部分
+    public final static String Action = "com.example.asd.intent";
+    //闹钟存放xml文件名称
+    public final static String AlarmName = "clocks.xml";
+    public final static String CityTime = "citytime.xml";
 }

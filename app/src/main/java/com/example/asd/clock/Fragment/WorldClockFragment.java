@@ -1,6 +1,5 @@
 package com.example.asd.clock.Fragment;
 
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.example.asd.clock.Fragment.Adapter.WorldClockAdapter;
 import com.example.asd.clock.Fragment.Base.BaseFragment;
@@ -31,11 +32,11 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.asd.clock.Utils.XMLUtils.readWorldClock;
 import static java.lang.Integer.parseInt;
-
 //世界时钟界面
 @SuppressLint("ValidFragment")
 public class WorldClockFragment extends BaseFragment{
@@ -98,6 +99,7 @@ public class WorldClockFragment extends BaseFragment{
         adapter = new WorldClockAdapter(activity, list);//实例化adapter
         dlv_workclock = new DragAndDrapListView(activity);
         dlv_workclock.setAdapter(adapter);//设置adapter
+        dlv_workclock.setDividerHeight(0);
         dlv_workclock.setDragViewId(R.id.ll_threeview);//需要实现的拖拉id
         //保存当前list集合
         Utils.setLists(list);
@@ -113,6 +115,7 @@ public class WorldClockFragment extends BaseFragment{
                     edit.setText("完成");
                 } else {
                     edit.setText("编辑");
+                    WorldClockAdapter.initData();
                     if (Utils.getList() != null) {
                         try {
                             //重写list集合 实现重新排序效果
@@ -127,9 +130,64 @@ public class WorldClockFragment extends BaseFragment{
                 Log.i("isEdit", String.valueOf(isEdit));
             }
         });
+
+        dlv_workclock.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                WorldClockAdapter.initData();
+                WorldClockAdapter.initDeleteButton();
+            }
+        });
+
+        adapter.setOnItemClicksListener(new WorldClockAdapter.onItemClicksListener() {
+            public void onClicks(View view, int position, List<WorldClock> list) {
+                View btn_delete = view.findViewById(R.id.btn_delete);
+                btn_delete.setOnClickListener(new Click(position, view, list));
+                WorldClockAdapter.initData();
+                HashMap<Integer,Boolean> map = WorldClockAdapter.getCitySelect();
+                map.put(position, true);
+                WorldClockAdapter.setCitySelect(map);
+                adapter.notifyDataSetChanged();
+            }
+        });
         new Thread(mRunnable).start();//启动线程
         basefragment.addView(dlv_workclock);//把当前listview添加到内容界面里面
         return view;
+    }
+
+    private class Click implements View.OnClickListener {
+        int position;
+        View view;
+        List<WorldClock> list;
+
+        public Click(int position) {
+            this.position = position;
+        }
+
+        public Click(int position, View view, List<WorldClock> list) {
+            this(position);
+            this.view = view;
+            this.list = list;
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.ll_threeview:
+                    Toast.makeText(activity,"text",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.btn_delete:
+                    String removeName = list.get(position).getCity_en();
+                    list.remove(position);
+                    removeItem(removeName);
+                    WorldClockAdapter.initData();
+                    mHandler.sendMessage(mHandler.obtainMessage());
+                    break;
+            }
+        }
+    }
+
+    private void removeItem(String city_en) {
+        XMLUtils.removeNoteToXML(city_en);
     }
 
     //startActivityForResult回调方法
@@ -142,6 +200,7 @@ public class WorldClockFragment extends BaseFragment{
             String country_en = parseCountryName(name_en);
             Log.i("Activity", city_en + ":" + country_en);
             getCityTime(city_en);//解析数据
+            mHandler.sendMessage(mHandler.obtainMessage());
         }
     }
 

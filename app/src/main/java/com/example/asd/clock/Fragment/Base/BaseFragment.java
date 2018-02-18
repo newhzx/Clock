@@ -1,8 +1,10 @@
 package com.example.asd.clock.Fragment.Base;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ public abstract  class BaseFragment extends Fragment {
     public TextView title;//标题
     public Button edit,add;//编辑和添加按钮
     public FrameLayout basefragment;//内容fargment
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

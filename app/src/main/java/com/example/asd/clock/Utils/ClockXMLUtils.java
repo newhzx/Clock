@@ -20,7 +20,7 @@ import java.util.List;
 public class ClockXMLUtils {
 
     public static void modifyNodeInClockXML(int id,boolean bool) throws IOException, DocumentException {
-        File file = Utils.isNotExistCreateFile("clock.xml","clocks");
+        File file = Utils.isNotExistCreateFile(Global.AlarmName,"clocks");
         //判断该节点是否存在于xml中
         if (!selectNoteInClockXML(id)) {
             Log.i("selectNoteInClockXML","已经存在该节点");
@@ -41,15 +41,15 @@ public class ClockXMLUtils {
             }
         }
         XMLUtils.Writer(doc, file);
-        Log.i("isFileExist", "成功修改Element数据");
+        Log.i("isFileExist", id+"成功修改Element数据");
     }
 
-    public static void addNoteToClockXML(int id, int lunchSelect, int hourSelect, int minuteSelect, int second, String tags, String json) throws IOException, DocumentException {
-        File file = Utils.isNotExistCreateFile("clock.xml","clocks");
+    public static int addNoteToClockXML(int id, int lunchSelect, int hourSelect, int minuteSelect, int second, String tags, String json) throws IOException, DocumentException {
+        File file = Utils.isNotExistCreateFile(Global.AlarmName,"clocks");
         //判断该节点是否存在于xml中
         if (selectNoteInClockXML(id)) {
             Log.i("selectNoteInClockXML",selectNoteInClockXML(id)+"");
-            return;
+            return -1;
         }
         SAXReader reader = new SAXReader();
         Document doc = reader.read(new FileInputStream(file));
@@ -69,6 +69,7 @@ public class ClockXMLUtils {
         list.add(index,e1);
         XMLUtils.Writer(doc, file);
         Log.i("isFileExist", "成功添加Element数据");
+        return index;
     }
 
     private static int inSertIndex(List<Element> list, int id) {
@@ -85,13 +86,13 @@ public class ClockXMLUtils {
 
     //判断xml文件是否存在某节点
     public static boolean selectNoteInClockXML(int id) {
-        File file = Utils.getFile("clock.xml");
+        File file = Utils.getFile(Global.AlarmName);
         Document document = null;
         SAXReader saxReader = new SAXReader(); // 用来读取xml文档
         try {
             //url是文件的地址
             document = saxReader.read(file);
-            List list = document.selectNodes("/clocks");//查找指定的节点
+            List list = document.selectNodes("//clocks");//查找指定的节点
             Iterator iterator = list.iterator();//迭代citys下所有的节点
             while (iterator.hasNext()) {
                 Element ele = (Element) iterator.next();
@@ -112,7 +113,7 @@ public class ClockXMLUtils {
 
     //读取指定文件的节点 返回list集合
     public static List<Clock> readSelectedClock() throws DocumentException, IOException {
-        File file = Utils.isNotExistCreateFile("clock.xml","clocks");
+        File file = Utils.isNotExistCreateFile(Global.AlarmName,"clocks");
         SAXReader sax = new SAXReader();//创建一个SAXReader对象
         Document document = sax.read(file);//获取document对象,如果文档无节点，则会抛出Exception提前结束
         Element root = document.getRootElement();//获取根节点
@@ -122,7 +123,7 @@ public class ClockXMLUtils {
 
     //读取指定文件的节点 返回list集合
     public static List<Clock> readClock() throws DocumentException, IOException {
-        File file = Utils.isNotExistCreateFile("clock.xml","clocks");
+        File file = Utils.isNotExistCreateFile(Global.AlarmName,"clocks");
         SAXReader sax = new SAXReader();//创建一个SAXReader对象
         Document document = sax.read(file);//获取document对象,如果文档无节点，则会抛出Exception提前结束
         Element root = document.getRootElement();//获取根节点
@@ -159,7 +160,7 @@ public class ClockXMLUtils {
     }
 
     public static void removeNoteInXML(int id) {
-        File file = Utils.getFile("clock.xml");
+        File file = Utils.getFile(Global.AlarmName);
         if (!selectNoteInClockXML(id)) {
             Log.i("selectNoteInXML",selectNoteInClockXML(id)+"");
             return;
@@ -169,7 +170,7 @@ public class ClockXMLUtils {
         try {
             //url是文件的地址
             document = saxReader.read(file);
-            List list = document.selectNodes("/clocks");//查找指定的节点
+            List list = document.selectNodes("//clocks");//查找指定的节点
             Iterator iterator = list.iterator();//迭代citys下所有的节点
             while (iterator.hasNext()) {
                 Element ele = (Element) iterator.next();

@@ -1,6 +1,7 @@
 package com.example.asd.clock.Utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -67,10 +68,10 @@ public class SoundUtils {
     //初始化铃声名称和类型集合
     private static List<String> listRong;
     private static List<Uri> listRingtones;
-    public static void initMusic(Activity activity) {
+    public static void initMusic(Context context) {
         listRong = new ArrayList<>();
         listRingtones = new ArrayList<>();
-        RingtoneManager ringtoneMgr = new RingtoneManager(activity);
+        RingtoneManager ringtoneMgr = new RingtoneManager(context);
         ringtoneMgr.setType(RingtoneManager.TYPE_ALARM);
         Cursor alarmsCursor = ringtoneMgr.getCursor();
         while (alarmsCursor != null && !alarmsCursor.isAfterLast() && alarmsCursor.moveToNext()) {

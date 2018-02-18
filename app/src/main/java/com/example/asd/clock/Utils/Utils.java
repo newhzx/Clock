@@ -59,7 +59,7 @@ public class Utils {
     public static File isNotExistCreateFile(String xml,String rootName) throws IOException {
         File file = getFile(xml);
         //不存在就创建
-        if (!file.exists()) {
+        if (!file.exists()||file==null) {
             file.createNewFile();
             Log.i("isFileExist", "文件不存在");
             //创建文档的根节点
@@ -71,7 +71,7 @@ public class Utils {
             //写入到xml文件中
             XMLUtils.Writer(document,file);
         }else {
-            Log.i("isFileExist", "文件已经存在");
+            Log.i("isFileExist", "文件已经存在aaaa");
         }
         return file;
     }

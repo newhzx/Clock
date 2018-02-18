@@ -31,15 +31,6 @@ import android.widget.CompoundButton;
 
 import com.example.asd.clock.R;
 
-
-/**
- * SwitchButton
- *
- * @author kyleduo
- * @since 2014-09-24
- */
-
-@SuppressWarnings("unused")
 //开关按钮
 public class SwitchButton extends CompoundButton {
     public static final float DEFAULT_THUMB_RANGE_RATIO = 1.8f;

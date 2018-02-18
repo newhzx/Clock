@@ -36,4 +36,26 @@ public class InitClockData {
         }
         return list;
     }
+    //分集合
+    public static List<String> getLoopViewHourInTimer(List<String> list){
+        for (int i=0;i<24;i++){
+            list.add(i+"小时");
+        }
+        return list;
+    }
+
+    //分和秒集合
+    public static List<String> getLoopViewMinuteInTimer(List<String> list){
+        for (int i=0;i<60;i++){
+            list.add(i+"分");
+        }
+        return list;
+    }
+
+    public static List<String> getLoopViewSecondInTimer(List<String> list){
+        for (int i=0;i<60;i++){
+            list.add(i+"秒");
+        }
+        return list;
+    }
 }

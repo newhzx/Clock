@@ -27,15 +27,11 @@ import static com.example.asd.clock.Utils.ClockXMLUtils.readClock;
 
 
 //闹钟界面
-public class ClockFragment extends BaseFragment {
+public class ClockFragment extends BaseFragment{
     private List<Clock> list;//存放当前list内容的对象
     private ClockAdapter adapter;
     private ListView listView;
     private boolean isEdit = false;//是否编辑状态
-
-    public ClockFragment() {
-    }
-
     //刷新页面的handler
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -48,14 +44,12 @@ public class ClockFragment extends BaseFragment {
             }
         }
     };
-
     //刷新界面方法
     private void refreshUI() throws IOException, DocumentException {
         list = readClock();
         adapter.updateListView(list, isEdit);
         ClockAdapter.initData();
     }
-
     @Override
     public View baseView(View view) throws IOException, DocumentException {
         title.setText("闹钟");
@@ -80,7 +74,7 @@ public class ClockFragment extends BaseFragment {
             }
         });
         list = readClock();//读取xml文件
-        adapter = new ClockAdapter(activity, list, isEdit);//实例化adapter
+        adapter = new ClockAdapter(activity, list, isEdit,activity);//实例化adapter
         listView = new ListView(activity);
         listView.setAdapter(adapter);//设置adapter
         listView.setDividerHeight(0);
@@ -101,18 +95,16 @@ public class ClockFragment extends BaseFragment {
                 } else {
                     ClockAdapter.initDeleteButton();
                 }
-
             }
         });
 
         adapter.setOnItemClickListenerListener(new ClockAdapter.onItemClickListener() {
-            @Override
             public void onClick(View view, int position, List<Clock> list) {
                 Utils.showToast(activity, "Text" + position);
                 View btn_deleteButton_clock = view.findViewById(R.id.btn_deleteButton_clock);
                 btn_deleteButton_clock.setOnClickListener(new Click(position, view, list));
                 ClockAdapter.initData();
-                HashMap<Integer, Boolean> map = ClockAdapter.getIsSelect();
+                HashMap<Integer,Boolean> map = ClockAdapter.getIsSelect();
                 map.put(position, true);
                 ClockAdapter.setIsSelect(map);
                 adapter.notifyDataSetChanged();
@@ -149,6 +141,14 @@ public class ClockFragment extends BaseFragment {
         public void onClick(View v) {
             int removeId = list.get(position).getId();
             list.remove(position);
+            ClockAdapter.listChoose.remove(position);
+            try {
+                new ClockAdapter().initSwitch(ClockAdapter.listChoose);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
             removeItem(removeId);
             mHandler.sendMessage(mHandler.obtainMessage());
         }

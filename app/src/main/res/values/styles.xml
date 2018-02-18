@@ -121,11 +121,18 @@
         <item name="android:background">@drawable/addclock_bg_selector_choose</item>
         <item name="android:clickable">true</item>
     </style>
+
+    <style name="TimerBottomRelativeStyle" parent="MWStyle">
+        <item name="android:background">@drawable/addclock_bg_selector</item>
+        <item name="android:clickable">true</item>
+    </style>
+
     <style name="AddClockBottomTextStyle" parent="WWStyle">
         <item name="android:textColor" >@color/colorSimpleDark</item>
         <item name="android:textSize">18dp</item>
         <item name="android:padding">15dp</item>
     </style>
+
     <style name="AddClockBottomButtonStyle" parent="WWStyle">
         <item name="android:textColor" >@color/colorSimpleDark</item>
         <item name="android:textSize">18dp</item>
@@ -150,7 +157,6 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:checked">true</item>
     </style>
 
     <style name="AddClockPhoneMusicNoneStyle" parent="MWStyle">
