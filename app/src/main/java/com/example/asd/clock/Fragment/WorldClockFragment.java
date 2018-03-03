@@ -107,7 +107,6 @@ public class WorldClockFragment extends BaseFragment{
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.showToast(activity,"worldclock");
                 isEdit = !isEdit;//取反
                 //设置当前状态
                 dlv_workclock.setIsDragAndDrop(isEdit);
@@ -130,14 +129,14 @@ public class WorldClockFragment extends BaseFragment{
                 Log.i("isEdit", String.valueOf(isEdit));
             }
         });
-
+        //点击listview的item就恢复成原来非编辑状态
         dlv_workclock.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WorldClockAdapter.initData();
                 WorldClockAdapter.initDeleteButton();
             }
         });
-
+        //弹出删除按钮 并添加删除侦听事件
         adapter.setOnItemClicksListener(new WorldClockAdapter.onItemClicksListener() {
             public void onClicks(View view, int position, List<WorldClock> list) {
                 View btn_delete = view.findViewById(R.id.btn_delete);
@@ -153,7 +152,7 @@ public class WorldClockFragment extends BaseFragment{
         basefragment.addView(dlv_workclock);//把当前listview添加到内容界面里面
         return view;
     }
-
+    //点击删除按钮的事件
     private class Click implements View.OnClickListener {
         int position;
         View view;
@@ -175,6 +174,7 @@ public class WorldClockFragment extends BaseFragment{
                 case R.id.ll_threeview:
                     Toast.makeText(activity,"text",Toast.LENGTH_SHORT).show();
                     break;
+                //点击删除后 list去掉该item xml文件也同样删掉该位置标志
                 case R.id.btn_delete:
                     String removeName = list.get(position).getCity_en();
                     list.remove(position);
@@ -185,7 +185,7 @@ public class WorldClockFragment extends BaseFragment{
             }
         }
     }
-
+    //删除某城市时间
     private void removeItem(String city_en) {
         XMLUtils.removeNoteToXML(city_en);
     }
@@ -200,7 +200,7 @@ public class WorldClockFragment extends BaseFragment{
             String country_en = parseCountryName(name_en);
             Log.i("Activity", city_en + ":" + country_en);
             getCityTime(city_en);//解析数据
-            mHandler.sendMessage(mHandler.obtainMessage());
+            mHandler.sendMessage(mHandler.obtainMessage());//刷新数据
         }
     }
 
@@ -213,6 +213,7 @@ public class WorldClockFragment extends BaseFragment{
             //链接成功
             @Override
             public void onSuccess(ResponseInfo responseInfo) {
+                //获取result下的信息
                 String result = (String) responseInfo.result;
                 Log.i("tags", "获取该城市网络数据成功");
                 Log.i("tags", result);

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--秒表界面-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LinearVertical">
+    <!--秒表显示时间界面-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/tv_stopwatch_fragment"
+        android:textSize="80dp"
+        android:gravity="center"
+        style="@style/MWStyle"/>
+    <RelativeLayout
+        style="@style/MWStyle">
+        <!--当前读秒-->
+    <TextView
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:id="@+id/tv_currentTime"
+        android:textSize="20dp"
+        android:gravity="center_vertical"/>
+    </RelativeLayout>
+    <!--计次,暂停继续按钮-->
+    <RelativeLayout
+        android:id="@+id/rl_stopwatch_buttons"
+        style="@style/MWStyle"
+        android:layout_marginTop="30dp">
+        <!--计次和复位按钮-->
+        <Button
+            android:id="@+id/btn_stopwatch_cancel"
+            style="@style/TimerRingStyle"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/timerringcancel"
+            android:text="@string/dot"/>
+        <!--暂停和继续按钮-->
+        <Button
+            android:id="@+id/btn_stopwatch_pause"
+            style="@style/TimerRingStyle"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/stopwatchpause"
+            android:text="@string/lunach" />
+    </RelativeLayout>
+    <!--秒表记录的计次信息-->
+    <ListView
+        android:id="@+id/lv_stopwatch_dot"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"/>
+</LinearLayout>

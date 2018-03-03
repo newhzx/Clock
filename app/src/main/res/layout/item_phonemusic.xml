@@ -6,9 +6,11 @@
     android:descendantFocusability="blocksDescendants"
     android:id="@+id/rl_addclock_bottom_music_choose"
     android:background="@drawable/addclock_bg_choose">
+    <!--铃声勾选框-->
     <CheckBox
         style="@style/CheckBoxStyle"
         android:id="@+id/cb_phonemusic" />
+    <!--铃声音乐名称-->
     <TextView
         android:id="@+id/tv_phonemusic"
         android:background="@drawable/addclock_bg_bottom"

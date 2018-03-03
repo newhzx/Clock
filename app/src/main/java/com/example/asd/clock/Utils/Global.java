@@ -20,6 +20,15 @@ public class Global {
     //行动的包名作为广播action的一部分
     public final static String Action = "com.example.asd.intent";
     //闹钟存放xml文件名称
-    public final static String AlarmName = "clocks.xml";
+    public final static String AlarmName = "clockss.xml";
+    //城市名称集合
     public final static String CityTime = "citytime.xml";
+    //振动频率
+    public final static long[] getTimerVibrator = {100L,100L,100L,200L,300L,1500L};
+    //计时器倒数速率
+    public final static int countDownInterval = 1000;
+    //秒表刷新速率
+    public final static int TIME_TO_SEND = 10;
+    //秒表接收关键字
+    public final static int TICK_WHAT = 2;
 }

@@ -11,14 +11,14 @@ public class VibratorUtils {
         if(vib == null){
             vib = (Vibrator) activity.getSystemService(Service.VIBRATOR_SERVICE);
         }
-        vib.vibrate(pattern,repeat);
+        vib.vibrate(pattern,repeat);//启动振动
     }
     //取消震动
     public static void virateCancle(final Activity activity){
         if(vib == null){
             vib = (Vibrator) activity.getSystemService(Service.VIBRATOR_SERVICE);
         }
-        vib.cancel();
+        vib.cancel();//取消振动方法
         vib = null;
     }
 }

@@ -4,21 +4,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--备注头部-->
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_tag_top"
         style="@style/AddClockBottomTopStyle">
+        <!--确定按钮-->
         <Button
             android:id="@+id/btn_addclocktag"
             style="@style/AddClockBottomTopBackStyle"/>
+        <!--备注界面标题-->
         <TextView
            style="@style/AddClockBottomTopTitleStyle"
             android:text="@string/tag"/>
     </RelativeLayout>
+    <!--灰线-->
     <View
         android:id="@+id/view_addclocktag"
         android:layout_below="@+id/rl_addclock_bottom_tag_top"
         style="@style/AddClockBottomTopLineStyle"/>
-
+    <!--备注编辑框-->
         <EditText
             android:layout_marginTop="150dp"
             android:textCursorDrawable="@drawable/cursor_color"
@@ -31,5 +35,4 @@
             android:padding="10dp"
             android:text="闹钟">
         </EditText>
-
 </LinearLayout>

@@ -1,58 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--添加铃声页面-->
+<!--添加铃声界面-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <!--外接添加闹钟的顶部-->
     <include
         android:id="@+id/addclock_top"
         layout="@layout/addclock_top"></include>
+    <!--划灰线-->
     <View
         style="@style/AddClockBottomTopLineStyle"
         android:layout_below="@+id/addclock_top" />
+    <!--闹钟滚轮-->
     <LinearLayout
         android:id="@+id/ll_addclock_loopview"
         style="@style/MWStyle"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
+        <!--空白填充滚轮-->
         <com.weigan.loopview.LoopView
             android:id="@+id/loopViewline"
             style="@style/LoopViewStyle" />
-
+        <!--上下午滚轮-->
         <com.weigan.loopview.LoopView
             android:id="@+id/loopViewLunch"
             style="@style/LoopViewStyle" />
-
+        <!--小时滚轮-->
         <com.weigan.loopview.LoopView
             android:id="@+id/loopViewHour"
             style="@style/LoopViewStyle" />
-
+        <!--分滚轮-->
         <com.weigan.loopview.LoopView
             android:id="@+id/loopViewMinute"
             style="@style/LoopViewStyle" />
-
+        <!--空白滚轮-->
         <com.weigan.loopview.LoopView
             android:id="@+id/loopViewlines"
             style="@style/LoopViewStyle" />
     </LinearLayout>
-
+    <!--划灰线-->
     <View
         android:id="@+id/view_addclock_loopview"
         style="@style/AddClockBottomTopLineStyle"
         android:layout_below="@+id/ll_addclock_loopview" />
-
+    <!--添加闹钟底部 四个选项（重复，标签，铃声，稍后提醒）-->
     <include
         android:id="@+id/addclock_bottom"
         layout="@layout/addclock_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_addclock_loopview" />
+    <!--划灰线-->
     <View
         android:id="@+id/view_addclock_bottom"
         style="@style/AddClockBottomTopLineStyle"
         android:layout_below="@+id/addclock_bottom" />
-
+    <!--编辑闹钟时显示出来 删除闹钟按钮-->
     <Button
         android:layout_below="@+id/view_addclock_bottom"
         android:id="@+id/btn_delete_addclock"

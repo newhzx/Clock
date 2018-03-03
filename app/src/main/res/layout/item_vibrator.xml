@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--振动item-->
+<!--重复内容，振动item-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/addclock_bg_repeat"
     android:layout_height="match_parent">
+    <!--存放item的盒子-->
     <RelativeLayout
         android:layout_marginLeft="15dp"
         android:background="@drawable/addclock_bg_bottom"
         style="@style/MWStyle">
+        <!--振动内容-->
         <TextView
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             style="@style/WWStyle"
             android:id="@+id/tv_vibrator"/>
+        <!--振动勾选框-->
         <CheckBox
             android:id="@+id/cb_vibrator"
             android:paddingRight="20dp"

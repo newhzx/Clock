@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Clock</string>
-
     <!--添加闹钟-->
     <string name="cancel">取消</string>
     <string name="add">存储</string>
@@ -19,6 +19,19 @@
     <string name="standrad">标准</string>
     <string name="lunch">上午</string>
     <string name="delete">删除</string>
+
     <!--计时器-->
     <string name="jisuan">计算结束时启用</string>
+    <string name="start">开始计时</string>
+    <string name="goon">继续</string>
+    <string name="pause">暂停</string>
+    <string name="timertitle">计时结束时启用</string>
+    <string name="set">设定</string>
+    <string name="timerstop">停止播放</string>
+
+    <!--秒表和计时器-->
+    <string name="dot">计次</string>
+    <string name="reset">复位</string>
+    <string name="lunach">启动</string>
+    <string name="stop">停止</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.asd.clock">
-    <!--各种权限 读写 网络-->
+    <!--各种权限 文件访问权限 读写 网络-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <!-- 主页 -->
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -32,22 +33,39 @@
         <!--闹钟添加页面-->
         <activity android:name=".Clock.AddClock"
             android:screenOrientation="portrait"></activity>
+        <!-- 闹钟重复选择页面 -->
         <activity android:name=".Clock.AddClockRepeat"
             android:screenOrientation="portrait"></activity>
+        <!-- 闹钟提示文本填写页面-->
         <activity android:name=".Clock.AddClockTag"
             android:windowSoftInputMode="stateVisible"
             android:screenOrientation="portrait"></activity>
+        <!-- 音乐选择界面 -->
         <activity android:name=".Clock.AddClockMusic"
             android:screenOrientation="portrait"></activity>
+        <!-- 振动选择界面-->
         <activity android:name=".Clock.AddClockVibrator"
             android:screenOrientation="portrait"></activity>
+        <!-- 闹钟活动界面-->
         <activity android:name=".Clock.AlarmClockActivity"></activity>
+        <!-- 闹钟发送的广播注册-->
         <receiver android:name=".Clock.AlarmClockReceiver" android:process=":newinst"></receiver>
+        <!-- 关闭应用所触发发送的广播-->
         <receiver android:name=".Clock.BootCompleteReceiver" >
             <intent-filter android:priority="1000" >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <!-- 广播调用的服务-->
         <service android:name=".Clock.AlarmClockService"></service>
+        <!-- 秒表音乐选择页面-->
+        <activity android:name=".Timer.TimerMusic"
+            android:screenOrientation="portrait"></activity>
+        <!-- 秒表响起的活动页面-->
+        <activity android:name=".Timer.TimerActivity"></activity>
+        <!-- 秒表广播注册-->
+        <receiver android:name=".Timer.TimerReceiver" android:process=":newinsts"></receiver>
+        <!-- 秒表调用的服务-->
+        <service android:name=".Timer.TimerService"></service>
     </application>
 </manifest>

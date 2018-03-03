@@ -6,49 +6,61 @@
     android:padding="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <!--世界时钟选项-->
     <LinearLayout
         android:id="@+id/ll_worldclock"
         style="@style/LinearLayoutStyle">
+        <!--世界时间图像-->
         <ImageView
             android:id="@+id/iv_worldclock"
             android:src="@drawable/worldclock_default"
             style="@style/BottomImageViewStyle"/>
+        <!--世界时间文字-->
         <TextView
             android:id="@+id/tv_worldclock"
             android:text="世界时钟"
             style="@style/BottomTextViewStyle"/>
     </LinearLayout>
+    <!--闹钟选项-->
     <LinearLayout
         android:id="@+id/ll_clock"
         style="@style/LinearLayoutStyle">
+        <!--闹钟图像-->
         <ImageView
             android:id="@+id/iv_clock"
             android:src="@drawable/clock_default"
             style="@style/BottomImageViewStyle"/>
+        <!--闹钟文字-->
         <TextView
             android:id="@+id/tv_clock"
             android:text="闹钟"
             style="@style/BottomTextViewStyle"/>
     </LinearLayout>
+    <!--计时器选项-->
     <LinearLayout
         android:id="@+id/ll_stopwatch"
         style="@style/LinearLayoutStyle">
+        <!--计时器图像-->
         <ImageView
             android:id="@+id/iv_stopwatch"
             android:src="@drawable/stopwatch_default"
             style="@style/BottomImageViewStyle"/>
+        <!--计时器文字-->
         <TextView
             android:id="@+id/tv_stopwatch"
             android:text="计时器"
             style="@style/BottomTextViewStyle"/>
     </LinearLayout>
+    <!--秒表选项-->
     <LinearLayout
         android:id="@+id/ll_timer"
         style="@style/LinearLayoutStyle">
+        <!--秒表图像-->
         <ImageView
             android:id="@+id/iv_timer"
             android:src="@drawable/timer_default"
             style="@style/BottomImageViewStyle"/>
+        <!--秒表文字-->
         <TextView
             android:id="@+id/tv_timer"
             android:text="秒表"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--秒表选择背景音乐页面-->
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--秒表头部 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--添加铃声头部界面-->
+        <RelativeLayout
+            android:id="@+id/rl_addclock_bottom_music_top"
+            style="@style/AddClockBottomTopStyle">
+            <!--取消按钮-->
+            <Button
+                android:id="@+id/btn_cancel_timermusic"
+                android:text="@string/cancel"
+                style="@style/AddClockBottomTopBackStyle" />
+            <!--标题-->
+            <TextView
+                style="@style/AddClockBottomTopTitleStyle"
+                android:text="@string/timertitle" />
+            <!--设定按钮-->
+            <Button
+                android:id="@+id/btn_set_timermusic"
+                android:text="@string/set"
+                style="@style/TimerBottomTopBackStyle" />
+        </RelativeLayout>
+        <!--灰线-->
+        <View
+            android:id="@+id/view_timermusic"
+            style="@style/AddClockBottomTopLineStyle"/>
+        <!--listview 把系统的铃声集合显示在listview中-->
+        <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:id="@+id/ll_timer_phonemusic"
+            style="@style/MWStyle">
+            <ListView
+                android:id="@+id/lv_timermusic"
+                style="@style/MWStyle"
+                android:background="@drawable/addclock_bg"
+                android:choiceMode="singleChoice"
+                android:divider="@null" />
+        </RelativeLayout>
+
+        <!--停止播放选项-->
+        <RelativeLayout
+            android:id="@+id/rl_timer_bottom_music_none"
+            style="@style/MWStyle"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/addclock_bg_selector">
+            <!--停止播放标志-->
+            <CheckBox
+                android:id="@+id/cb_phonemusic_none"
+                style="@style/CheckBoxStyle"
+                android:padding="10dp" />
+            <!--停止播放文字-->
+            <TextView
+                android:id="@+id/tv_phonemusic"
+                android:text="@string/timerstop"
+                android:layout_toRightOf="@+id/cb_phonemusic_none"
+                style="@style/AddClockPhoneMusicNoneStyle"/>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

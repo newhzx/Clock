@@ -51,6 +51,7 @@ public class Utils {
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             //2.获取SD卡根目录
             File SDpath = Environment.getExternalStorageDirectory();
+            //返回文件对象
             file = new File(SDpath.getAbsolutePath(), xml);
         }
         return file;
@@ -60,7 +61,7 @@ public class Utils {
         File file = getFile(xml);
         //不存在就创建
         if (!file.exists()||file==null) {
-            file.createNewFile();
+            file.createNewFile();//创建新文件
             Log.i("isFileExist", "文件不存在");
             //创建文档的根节点
             Document document = DocumentHelper.createDocument();
@@ -84,15 +85,17 @@ public class Utils {
         }
         return mapCount;
     }
+    //将字符串类型转化为map对象
     public  static  Map<Integer,Boolean> getRepeat(String string){
         Log.i("string",string);
         Gson gson = new Gson();
         Map<Integer,Boolean> map = gson.fromJson(string,new TypeToken<HashMap<Integer,Boolean>>(){}.getType());
         return map;
     }
+    //将map对象类型转化为string字符串 显示重复的字符串类型
     public static String getRepeatContent(Map<Integer, Boolean> map) {
         int count = 0;
-        int currentNum = getMapCount(map);
+        int currentNum = getMapCount(map);//选中的重复个数
         List<String> list = AddClockRepeat.getList();
         StringBuffer sb = new StringBuffer();
         if (currentNum == 0) {

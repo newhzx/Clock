@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
-import android.util.Log;
 
 import com.example.asd.clock.Fragment.Adapter.ClockAdapter;
 import com.example.asd.clock.Fragment.Bean.Clock;
@@ -26,7 +25,6 @@ public class BootCompleteReceiver extends BroadcastReceiver {
     public static List<Boolean> listChoose = new ArrayList<>();
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(TAG, "----------手机重启完毕！-------------");
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         List<Clock> clockInfos = null;
         try {

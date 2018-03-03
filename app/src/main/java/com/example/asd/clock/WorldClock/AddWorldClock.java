@@ -83,9 +83,9 @@ public class AddWorldClock extends AppCompatActivity {
         initViews();//排序过程
     }
     private void initxml() {
-        //判断是否需要生成xml文件
+            //判断是否需要生成xml文件
             file = Utils.getFile("timezone.xml");
-            if (file.exists()) {
+            if (file.exists()) {//判断文件是否存在
                 Log.i("tags", "已存在该文件");
                 return;
             }
@@ -123,8 +123,8 @@ public class AddWorldClock extends AppCompatActivity {
         sb = new StringBuffer();
         sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         sb.append("<resource>");
-        JSONObject jsonObject = new JSONObject(result);
-        JSONObject json = jsonObject.getJSONObject("result");
+        JSONObject jsonObject = new JSONObject(result);//封装为jsonObject
+        JSONObject json = jsonObject.getJSONObject("result");//获取result的内容
         Iterator keyIter = json.keys();//获取所有关键词
         String key;//关键词载体
         String value;//关键词对应值载体
@@ -144,13 +144,13 @@ public class AddWorldClock extends AppCompatActivity {
 //          {"continents_en":"africa","continents_cn":"非洲",
 //          "contry_en":"algeria","contry_cn":"阿尔及利亚",
 //          "city_en":"algiers","city_cn":"阿尔及尔"}
-            jsonobject = new JSONObject(value);
-            contry_en = jsonobject.getString("contry_en");
-            city_en = jsonobject.getString("city_en");
+            jsonobject = new JSONObject(value);//解析value数据
+            contry_en = jsonobject.getString("contry_en");//获取国家英文名
+            city_en = jsonobject.getString("city_en");//获取城市英文名
             //生成id
             sb.append(contry_en + "/" + city_en + "\"");
-            contry_cn = jsonobject.getString("contry_cn");
-            city_cn = jsonobject.getString("city_cn");
+            contry_cn = jsonobject.getString("contry_cn");//获取国家中文名
+            city_cn = jsonobject.getString("city_cn");//获取城市英文名
             //生成name
             sb.append(" name=\"" + city_cn + "(" + contry_cn + ")\"");
             sb.append("/>");
@@ -238,9 +238,7 @@ public class AddWorldClock extends AppCompatActivity {
             }
         });
     }
-    /**
-     * 为ListView填充数据
-     */
+//  ListView填充数据
     private List<SortModel> filledData(String[] date, String[] ids) {
         List<SortModel> mSortList = new ArrayList<SortModel>();
         for (int i = 0; i < date.length; i++) {
@@ -262,9 +260,7 @@ public class AddWorldClock extends AppCompatActivity {
         return mSortList;
     }
 
-    /**
-     * 根据输入框中的值来过滤数据并更新ListView
-     */
+    //根据输入框中的值来过滤数据并更新ListView
     private void filterData(String filterStr) {
         List<SortModel> filterDateList = new ArrayList<SortModel>();
         if (TextUtils.isEmpty(filterStr)) {

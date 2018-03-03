@@ -3,29 +3,36 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--重复闹钟界面-->
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_repeat_top"
         style="@style/AddClockBottomTopStyle">
+        <!--确定重复按钮-->
         <Button
             android:id="@+id/btn_addclockrepeat"
             style="@style/AddClockBottomTopBackStyle"/>
+        <!--重复界面标题-->
         <TextView android:text="@string/repeat"
             style="@style/AddClockBottomTopTitleStyle"/>
     </RelativeLayout>
+    <!--划灰线-->
     <View
         android:id="@+id/view_addclockrepeat"
         android:layout_below="@+id/rl_addclock_bottom_repeat_top"
         style="@style/AddClockBottomTopLineStyle"/>
+    <!--划灰线-->
     <View
         android:layout_below="@+id/view_addclockrepeat"
         android:id="@+id/view_addclockrepeat2"
         android:layout_marginTop="30dp"
         style="@style/AddClockBottomTopLineStyle"/>
+    <!--添加重复闹钟的-->
     <ListView
         android:divider="@null"
         android:layout_below="@+id/view_addclockrepeat2"
         style="@style/MWStyle"
         android:id="@+id/lv_addclockrepeat"/>
+    <!--划灰线-->
   <View
         android:layout_below="@+id/lv_addclockrepeat"
        style="@style/AddClockBottomTopLineStyle"/>

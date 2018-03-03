@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:gravity="center_horizontal"
         android:layout_height="match_parent"
-        android:layout_width="40dp">
+        android:layout_width="60dp">
         <!--弹出删除按钮的Button-->
         <ImageView
             android:focusable="false"
@@ -66,6 +66,7 @@
         <!--三条白线作为按钮 可以拖动控件-->
         <LinearLayout
             android:id="@+id/ll_threeview"
+            android:clickable="true"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

@@ -1,42 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<!--倒计时的界面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/ll_timer_loopview"
-        style="@style/MWStyle"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="-30dp"
-        android:orientation="horizontal">
-        <com.weigan.loopview.LoopView
-            android:id="@+id/loopViewHourInTimer"
-            style="@style/LoopViewStyle" />
-        <com.weigan.loopview.LoopView
-            android:id="@+id/loopViewMinuteInTimer"
-            style="@style/LoopViewStyle" />
-        <com.weigan.loopview.LoopView
-            android:id="@+id/loopViewSecondInTimer"
-            style="@style/LoopViewStyle" />
-    </LinearLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--三个滚轮控件-->
+        <LinearLayout
+            android:id="@+id/ll_timer_loopview"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="horizontal">
+            <!--小时滚轮-->
+            <com.weigan.loopview.LoopView
+                android:id="@+id/loopViewHourInTimer"
+                style="@style/LoopViewInTimerStyle" />
+            <!--分滚轮-->
+            <com.weigan.loopview.LoopView
+                android:id="@+id/loopViewMinuteInTimer"
+                style="@style/LoopViewInTimerStyle" />
+            <!--秒滚轮-->
+            <com.weigan.loopview.LoopView
+                android:id="@+id/loopViewSecondInTimer"
+                style="@style/LoopViewInTimerStyle" />
+        </LinearLayout>
+    <!--点击启动按钮，切换滚轮的TextView界面，默认不显示-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:id="@+id/tv_timer_fragment"
+            android:textSize="80dp"
+            android:gravity="center"
+            style="@style/MWStyle"
+            android:visibility="gone"/>
+    <!--选择倒计时响起的音乐-->
     <RelativeLayout
         android:id="@+id/rl_timer_music"
         style="@style/TimerBottomRelativeStyle">
+        <!--提示信息-->
         <TextView
-            android:text="@string/jisuan"
-            style="@style/AddClockBottomChooseStyle"/>
+            style="@style/AddClockBottomChooseStyle"
+            android:text="@string/jisuan" />
+        <!--选择响铃音乐的名称-->
         <TextView
+            android:id="@+id/tv_timer_music"
+            style="@style/AddClockBottomTextStyle"
             android:layout_toLeftOf="@id/tv_music_rightrow"
-            android:text="@string/leida"
-            android:id="@+id/tv_music"
-            style="@style/AddClockBottomTextStyle"/>
+            android:text="@string/leida" />
+        <!--符号信息-->
         <TextView
             android:id="@+id/tv_music_rightrow"
             style="@style/AddClockBottomBackStyle"
-            android:text=">"/>
+            android:text=">" />
     </RelativeLayout>
-    
+    <!--取消和启动按钮-->
+    <RelativeLayout
+        android:id="@+id/rl_timer_button"
+        style="@style/MWStyle"
+        android:layout_marginTop="30dp">
+        <!--取消按钮-->
+        <Button
+            android:id="@+id/timer_cancel"
+            style="@style/TimerRingStyle"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/timerringcancel"
+            android:text="@string/cancel" />
+        <!--暂停和继续按钮-->
+        <Button
+            android:id="@+id/timer_pause"
+            style="@style/TimerRingStyle"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/timerringpause"
+            android:text="@string/start" />
+    </RelativeLayout>
 </LinearLayout>

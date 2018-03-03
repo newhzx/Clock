@@ -3,14 +3,18 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <!--自定义资源颜色-->
     <color name="colorWhite">#fff</color>
     <color name="colorBlack">#000</color>
     <color name="colorRed">#f00</color>
+    <color name="colorSimpleRed">#da4d4d</color>
     <color name="colorGreen">#0f0</color>
     <color name="colorBlue">#00f</color>
     <color name="colorOrange">#f39800</color>
     <color name="colorDark">#b222</color>
     <color name="colorSimpleDark">#b666</color>
     <color name="colorSimDark">#ddbeb3b3</color>
+    <color name="colorsDark">#dd3b3a3a</color>
+    <color name="colorSimpleGreen">#75f575</color>
+    <color name="colorSimpleOrange">#f7bf6b</color>
 </resources>

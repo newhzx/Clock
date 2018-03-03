@@ -24,9 +24,11 @@ public class SoundUtils {
     //开始播放
     public static void playRing(final Activity activity, Uri alert) {
         try {
+            //判空
             if (mMediaPlayer == null) {
                 mMediaPlayer = new MediaPlayer();
             }
+            //判断是否在播放
             if(mMediaPlayer.isPlaying()){
                 mMediaPlayer.stop();
             }
@@ -35,6 +37,7 @@ public class SoundUtils {
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
             mMediaPlayer.prepare();
             mMediaPlayer.start();
+            //侦听播放完毕事件 播放完毕就停止振动
             mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {

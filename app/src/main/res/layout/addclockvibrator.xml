@@ -8,29 +8,33 @@
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_vibrator_top"
         style="@style/AddClockBottomTopStyle">
+        <!--取消按钮-->
         <Button
             android:id="@+id/btn_addclock_music"
             android:text="@string/music"
             style="@style/AddClockBottomTopBackStyle" />
+        <!--振动界面标题-->
         <TextView
             style="@style/AddClockBottomTopTitleStyle"
             android:text="@string/vibrator" />
     </RelativeLayout>
+    <!--灰线-->
     <View
         style="@style/AddClockBottomTopLineStyle"
         android:id="@+id/view_addclockmusic"
         android:layout_below="@+id/rl_addclock_bottom_vibrator_top" />
-
+    <!--振动提示文本-->
     <TextView
         android:id="@+id/tv_addclock_vibrator"
         android:layout_below="@+id/rl_addclock_bottom_vibrator_top"
         android:text="@string/standrad"
         style="@style/AddClockBottomMusicTextStyle"/>
-
+    <!--振动包裹listview的盒子-->
     <RelativeLayout
         android:id="@+id/rl_addclock_vibrator"
         style="@style/MWStyle"
         android:layout_below="@+id/tv_addclock_vibrator">
+        <!--振动的listview-->
         <ListView
             android:id="@+id/lv_addclock_vibrator"
             style="@style/MWStyle"
@@ -38,19 +42,20 @@
             android:choiceMode="singleChoice"
             android:divider="@null" />
     </RelativeLayout>
-
+    <!--振动无的选项-->
     <RelativeLayout
         android:id="@+id/rl_addclock_vibrator_none"
         style="@style/MWStyle"
         android:layout_marginTop="30dp"
         android:background="@drawable/addclock_bg_selector">
-
+        <!--振动标签 无-->
         <TextView
             android:id="@+id/tv_vibrator_none"
             android:text="@string/none"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             style="@style/AddClockPhoneMusicNoneStyle"/>
+        <!--振动勾选框-->
         <CheckBox
             android:id="@+id/cb_vibrator_none"
             android:layout_alignParentRight="true"

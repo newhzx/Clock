@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--闹钟item-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_item_clock"
@@ -16,7 +17,7 @@
         android:layout_centerVertical="true"
         android:gravity="center_horizontal"
         android:visibility="gone">
-
+        <!--删除按钮的图像-->
         <ImageView
             android:id="@+id/iv_delete_item_clock"
             style="@style/ItemClockImageView"
@@ -27,28 +28,29 @@
         android:id="@+id/rl_content_clock"
         style="@style/ItemClockRelative"
         android:layout_marginLeft="20dp">
+        <!--闹钟信息盒子-->
         <LinearLayout
             android:id="@+id/ll_content_clock"
             style="@style/LinearVertical"
             android:layout_alignParentLeft="true">
-
+            <!--存放上下午和时间的盒子-->
             <LinearLayout
                 android:id="@+id/ll_content_item_clock"
                 style="@style/LinearHorizontal">
-
+                <!--上下午标签-->
                 <TextView
                     android:id="@+id/tv_lunch_clock"
                     style="@style/ItemClockTextViewStyle"
                     android:text="@string/lunch"
                     android:textSize="28dp" />
-
+                <!--闹铃时间标签-->
                 <TextView
                     android:id="@+id/tv_clocktime_clock"
                     style="@style/ItemClockTextViewStyle"
                     android:text="12:00"
                     android:textSize="52dp" />
             </LinearLayout>
-
+            <!--闹钟提示信息标签-->
             <TextView
                 android:id="@+id/tv_tagAndjson_clock"
                 style="@style/ItemClockTextViewStyle"
@@ -56,7 +58,7 @@
                 android:text="@string/clock"
                 android:textSize="15dp" />
         </LinearLayout>
-
+        <!--编辑状态下的符号-->
         <TextView
             android:id="@+id/tv_row_clock"
             android:layout_width="wrap_content"
@@ -68,14 +70,14 @@
             android:textColor="@color/colorSimpleDark"
             android:textSize="25dp"
             android:visibility="gone"></TextView>
-
+        <!--非编辑状态下的切换状态按钮-->
         <com.example.asd.clock.Clock.SwitchButton.SwitchButton
             android:id="@+id/sb_clock"
             style="@style/AddClockBottomSwitchStyle"
             app:kswBackDrawable="@drawable/ios_back_drawable"
             app:kswThumbDrawable="@drawable/ios_thumb_selector" />
     </RelativeLayout>
-    <!--删除时钟按钮-->
+    <!--删除闹钟按钮-->
     <Button
         android:id="@+id/btn_deleteButton_clock"
         style="@style/ItemDeleteBottonStyle"

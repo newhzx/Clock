@@ -106,7 +106,7 @@ public class AlarmClockActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.btn_alarm_clock_close:
                 flag_is_pause_or_close =true;
-                ClockAdapter.listChoose.set(position,false);
+//                ClockAdapter.listChoose.set(position,false);
                 try {
                     new ClockAdapter().initSwitch(ClockAdapter.listChoose);
                     ServiceProvider.close();

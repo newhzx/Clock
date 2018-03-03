@@ -13,51 +13,56 @@
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_music_top"
         style="@style/AddClockBottomTopStyle">
+        <!--设置铃声界面-->
         <Button
             android:id="@+id/btn_addclockmusic"
             android:text="@string/back"
             style="@style/AddClockBottomTopBackStyle" />
+        <!--铃声界面标题-->
         <TextView
             style="@style/AddClockBottomTopTitleStyle"
             android:text="@string/music" />
     </RelativeLayout>
-
+    <!--划灰线-->
     <View
         android:id="@+id/view_addclockmusic"
         style="@style/AddClockBottomTopLineStyle"/>
-
+    <!--进入振动状态-->
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_music_vibrator"
         style="@style/MWStyle"
         android:layout_marginTop="20dp"
         android:background="@drawable/addclock_bg_selector"
         android:clickable="true">
-
+        <!--返回振动选择-->
         <Button
             style="@style/AddClockBottomButtonStyle"
             android:id="@+id/btn_addclockmusic_vibrator"
             android:layout_alignParentLeft="true"
             android:text="@string/vibrator"
             android:textColor="@color/colorWhite" />
+        <!--显示振动选择的标签-->
         <TextView
             android:id="@+id/tv_music_vibrator"
             style="@style/AddClockBottomTextStyle"
             android:layout_toLeftOf="@id/tv_music_vibrator_rightrow"
             android:text="默认" />
+        <!--振动标签-->
         <TextView
             android:id="@+id/tv_music_vibrator_rightrow"
             style="@style/AddClockBottomBackStyle"
             android:text=">" />
     </RelativeLayout>
-
+    <!--电话铃声提醒标志-->
     <TextView
         android:id="@+id/tv_addclock_phonemusic"
         android:text="@string/phonemusic"
         style="@style/AddClockBottomMusicTextStyle"/>
-
+    <!--音乐选择显示listview-->
     <RelativeLayout
         android:id="@+id/ll_addclock_phonemusic"
         style="@style/MWStyle">
+        <!--电话铃声选择listview-->
         <ListView
             android:id="@+id/lv_addclockmusic"
             style="@style/MWStyle"
@@ -65,18 +70,18 @@
             android:choiceMode="singleChoice"
             android:divider="@null" />
     </RelativeLayout>
-
+    <!--音乐选项—无-->
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_music_none"
         style="@style/MWStyle"
         android:layout_marginTop="30dp"
         android:background="@drawable/addclock_bg_selector">
-
+        <!--无的勾选框-->
         <CheckBox
             android:id="@+id/cb_phonemusic_none"
             style="@style/CheckBoxStyle"
             android:padding="10dp" />
-
+        <!--无的内容-->
         <TextView
             android:id="@+id/tv_phonemusic"
             android:text="@string/none"

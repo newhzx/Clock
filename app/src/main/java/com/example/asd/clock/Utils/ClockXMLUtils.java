@@ -18,32 +18,32 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ClockXMLUtils {
-
+    //更新xml文件是否播放的字段
     public static void modifyNodeInClockXML(int id,boolean bool) throws IOException, DocumentException {
-        File file = Utils.isNotExistCreateFile(Global.AlarmName,"clocks");
+        File file = Utils.isNotExistCreateFile(Global.AlarmName,"clocks");//是否存在该文件 不存在就创建文件
         //判断该节点是否存在于xml中
         if (!selectNoteInClockXML(id)) {
             Log.i("selectNoteInClockXML","已经存在该节点");
             return;
         }
-        SAXReader reader = new SAXReader();
-        Document doc = reader.read(new FileInputStream(file));
-        Element root = doc.getRootElement();
-
+        SAXReader reader = new SAXReader();//dom4j写入文件
+        Document doc = reader.read(new FileInputStream(file));//文件写入对象
+        Element root = doc.getRootElement();//获取根节点
         // 取得某节点下名为"clock"的所有字节点
         List<Element> nodes = root.elements("clock");
-        Element element = null;
-        for (Object obj : nodes) {
-            element = (Element) obj;
+        Element element = null;//
+        for (Object obj : nodes) {//遍历节点
+            element = (Element) obj;//强转为节点对象
             // 修改指定节点下的子节点的值
             if (element.valueOf("_id") != null && id==Integer.parseInt(element.valueOf("_id"))) {
                 element.element("switchStatus").setText(String.valueOf(bool));
             }
         }
-        XMLUtils.Writer(doc, file);
+        XMLUtils.Writer(doc, file);//写入到xml文件中
         Log.i("isFileExist", id+"成功修改Element数据");
     }
 
+    //添加节点
     public static int addNoteToClockXML(int id, int lunchSelect, int hourSelect, int minuteSelect, int second, String tags, String json) throws IOException, DocumentException {
         File file = Utils.isNotExistCreateFile(Global.AlarmName,"clocks");
         //判断该节点是否存在于xml中
@@ -53,9 +53,11 @@ public class ClockXMLUtils {
         }
         SAXReader reader = new SAXReader();
         Document doc = reader.read(new FileInputStream(file));
-        Element root = doc.getRootElement();
+        Element root = doc.getRootElement();//获取根节点
 
+        //创建子节点
         Element e1 = DocumentHelper.createElement("clock");
+//        子节点内容
         e1.addElement("_id").addText(id+"");
         e1.addElement("lunchSelect").addText(lunchSelect+"");
         e1.addElement("hourSelect").addText(hourSelect+"");
@@ -64,17 +66,20 @@ public class ClockXMLUtils {
         e1.addElement("tags").addText(tags);
         e1.addElement("json").addText(json);
         e1.addElement("switchStatus").addText(String.valueOf(true));
-        List<Element> list = root.elements("clock");
-        int index = inSertIndex(list,id);
-        list.add(index,e1);
-        XMLUtils.Writer(doc, file);
+        List<Element> list = root.elements("clock");//获取所有节点的结合
+        int index = inSertIndex(list,id);//插入节点的位置
+        list.add(index,e1);//插入到list集合中
+        XMLUtils.Writer(doc, file);//写入该xml文件中
         Log.i("isFileExist", "成功添加Element数据");
         return index;
     }
-
+    //插入节点的位置
     private static int inSertIndex(List<Element> list, int id) {
+        //插入节点头的位置
         if(list.size()==0||id<Integer.parseInt(list.get(0).valueOf("_id"))) return 0;
+        //插入节点尾的位置
         if(id>Integer.parseInt(list.get(list.size()-1).valueOf("_id"))) return list.size();
+        //插入节点之间的位置
         for (int i =0;i<list.size();i++){
             int pre = Integer.parseInt(list.get(i).valueOf("_id"));
             int back = Integer.parseInt(list.get(i+1).valueOf("_id"));
@@ -172,10 +177,10 @@ public class ClockXMLUtils {
             document = saxReader.read(file);
             List list = document.selectNodes("//clocks");//查找指定的节点
             Iterator iterator = list.iterator();//迭代citys下所有的节点
-            while (iterator.hasNext()) {
+            while (iterator.hasNext()) {//是否有下一个根节点
                 Element ele = (Element) iterator.next();
                 Iterator it = ele.elementIterator("clock");//指定到city
-                while (it.hasNext()) {
+                while (it.hasNext()) {//是否有下一个子节点
                     Element es = (Element) it.next();//迭代的所有city节点
                     //Log.i("taggg",es.getName() + "#" + es.valueOf("city_en") + "#" + es.getStringValue());
                     if (es.valueOf("_id") != null && id == Integer.parseInt(es.valueOf("_id"))) {
@@ -183,7 +188,7 @@ public class ClockXMLUtils {
                     }
                 }
             }
-            XMLUtils.Writer(document, file);
+            XMLUtils.Writer(document, file);//写入到文件中
         } catch (DocumentException e1) {
             e1.printStackTrace();
         } catch (IOException e) {

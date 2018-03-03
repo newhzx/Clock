@@ -1,68 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--添加闹钟尾部页面-->
+<!--添加闹钟的四个选项-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/addclock_bg"
     style="@style/MWStyle">
+    <!--选项一 重复周期-->
     <RelativeLayout
         style="@style/AddClockBottomRelativeStyle"
         android:id="@+id/rl_addclock_bottom_repeat">
+        <!--重复标签-->
         <TextView
             android:text="@string/repeat"
             style="@style/AddClockBottomChooseStyle"/>
+        <!--重复内容-->
         <TextView
             android:layout_toLeftOf="@id/tv_repeat_rightrow"
             android:text="@string/forover"
             android:id="@+id/tv_repeat"
             style="@style/AddClockBottomTextStyle"/>
+        <!--重复符号-->
         <TextView
             android:id="@+id/tv_repeat_rightrow"
             style="@style/AddClockBottomBackStyle"
             android:text=">"/>
     </RelativeLayout>
+    <!--划灰线-->
     <include layout="@layout/viewlinepaddingleft"/>
+    <!--选项二 标签-->
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_tag"
         style="@style/AddClockBottomRelativeStyle">
+        <!-- 提示标签 -->
         <TextView
             android:text="@string/tag"
             style="@style/AddClockBottomChooseStyle"/>
+        <!--标签内容-->
         <TextView
             android:layout_toLeftOf="@id/tv_tag_rightrow"
             android:text="@string/clock"
             android:id="@+id/tv_tag"
             style="@style/AddClockBottomTextStyle"/>
+        <!--标签符号-->
         <TextView
             android:id="@+id/tv_tag_rightrow"
             style="@style/AddClockBottomBackStyle"
             android:text=">"/>
     </RelativeLayout>
+    <!--划灰线-->
     <include layout="@layout/viewlinepaddingleft"/>
+    <!--选项三 选择铃声选项-->
     <RelativeLayout
         android:id="@+id/rl_addclock_bottom_music"
         style="@style/AddClockBottomRelativeStyle">
+        <!-- 铃声标签 -->
         <TextView
             android:text="@string/music"
             style="@style/AddClockBottomChooseStyle"/>
+        <!-- 铃声选择标签-->
         <TextView
             android:layout_toLeftOf="@id/tv_music_rightrow"
             android:text="@string/leida"
             android:id="@+id/tv_music"
             style="@style/AddClockBottomTextStyle"/>
+        <!--标签符号-->
         <TextView
             android:id="@+id/tv_music_rightrow"
             style="@style/AddClockBottomBackStyle"
             android:text=">"/>
     </RelativeLayout>
+    <!--划灰线-->
     <include layout="@layout/viewlinepaddingleft"/>
+    <!--选项四 稍后提醒选项 -->
     <RelativeLayout
         android:background="@color/colorDark"
         android:id="@+id/rl_addclock_bottom_tips"
         style="@style/MWStyle">
+        <!--是否提醒标签-->
         <TextView
             android:text="@string/tips"
             style="@style/AddClockBottomChooseStyle"/>
+        <!--勾选提醒状态-->
         <com.example.asd.clock.Clock.SwitchButton.SwitchButton
             android:id="@+id/sb_ios"
             style="@style/AddClockBottomSwitchStyle"

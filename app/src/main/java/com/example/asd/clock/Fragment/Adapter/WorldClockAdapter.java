@@ -29,7 +29,7 @@ public class WorldClockAdapter extends BaseAdapter{
     private static List<WorldClock> list;//世界时钟list集合
     private boolean isEdit = false;//是否编辑状态
     private static HashMap<Integer,Boolean> isCitySelect = new HashMap<Integer,Boolean>();
-//    初始化界面
+    //初始化界面
     public WorldClockAdapter(Activity activity, List<WorldClock> list) {
         this.activity = activity;
         this.list = list;
@@ -174,7 +174,7 @@ public class WorldClockAdapter extends BaseAdapter{
         } else {
             viewHolder.tv_time.setText(currentHour + ":" + minute);
         }
-
+        //添加按钮点击事件
         final View finalConvertView = convertView;
         viewHolder.rl_delete_botton_worldclock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,10 +182,11 @@ public class WorldClockAdapter extends BaseAdapter{
                 mOnItemClicksListener.onClicks(finalConvertView, position, list);
             }
         });
-
         if (getCitySelect().get(position)) {
+            //移动item的左边距
             viewHolder.rl_item.setPadding(-120, viewHolder.rl_content.getPaddingTop(), right, viewHolder.rl_content.getPaddingBottom());
 
+            //显示删除按钮
             viewHolder.btn_delete.setPadding(0, 0, 0, 0);
             viewHolder.btn_delete.setVisibility(View.VISIBLE);
             viewHolder.btn_delete.setHeight(viewHolder.rl_content.getHeight());
@@ -208,6 +209,7 @@ public class WorldClockAdapter extends BaseAdapter{
         Utils.setList(list);
     }
 
+    //添加listview的回掉方法
     public interface onItemClicksListener {
         void onClicks(View view, int position, List<WorldClock> list);
     }
@@ -216,7 +218,7 @@ public class WorldClockAdapter extends BaseAdapter{
     public void setOnItemClicksListener(onItemClicksListener mOnItemClicksListener) {
         this.mOnItemClicksListener = mOnItemClicksListener;
     }
-
+    //恢复成编辑的初始状态
     public static void initDeleteButton() {
         for (int i = 0; i < parent.getChildCount(); i++) {
             View view = parent.getChildAt(i);
@@ -227,64 +229,6 @@ public class WorldClockAdapter extends BaseAdapter{
             rl_item.setPadding(0, 0, 0, 0);
         }
     }
-   /* //注册事件所实例化的class类 实现按钮的效果
-    class ListViewItemListener implements View.OnClickListener {
-        int position;
-        ViewHolder viewHolder;
-        int right;
-        public ListViewItemListener(){}
-        //注册事件构造方法
-        public ListViewItemListener(int position, ViewHolder viewHolder) {
-            this.position = position;
-            this.viewHolder = viewHolder;
-        }
-        //重载
-        public ListViewItemListener(int position, ViewHolder viewHolder, int right) {
-            this.position = position;
-            this.viewHolder = viewHolder;
-            this.right = right;
-        }
-//        要实现的click方法
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                //点击item的效果
-                case R.id.rl_content:
-                    viewHolder.rl_content.setPadding(40, viewHolder.rl_content.getPaddingTop(), 0, viewHolder.rl_content.getPaddingBottom());
-
-                    viewHolder.btn_delete.setVisibility(View.GONE);
-                    break;
-                    //点击删除按钮的操作
-               case R.id.btn_delete:
-                   if(Utils.getLists().size()>0){
-                       String city_en = list.get(position).getCity_en();
-                       list.remove(position);
-                       Utils.setLists(list);
-                       viewHolder.rl_content.setPadding(40, viewHolder.rl_content.getPaddingTop(), 0, viewHolder.rl_content.getPaddingBottom());
-                       viewHolder.btn_delete.setVisibility(View.GONE);
-
-                       notifyDataSetChanged();
-                       Utils.showToast(activity, city_en);
-                       removeItem(city_en);
-                       Log.i("notifyDataSetChanged()",city_en+""+position);
-                   }
-                   break;
-                //弹出删除按钮的按钮
-                case R.id.rl_delete_botton_worldclock:
-                    Utils.showToast(activity, list.get(position).getCity_cn());
-                    viewHolder.rl_content.setPadding(-100, viewHolder.rl_content.getPaddingTop(), right, viewHolder.rl_content.getPaddingBottom());
-
-                    viewHolder.btn_delete.setPadding(0, 0, 0, 0);
-                    viewHolder.btn_delete.setVisibility(View.VISIBLE);
-                    viewHolder.btn_delete.setHeight(viewHolder.rl_content.getHeight());
-                    viewHolder.btn_delete.setOnClickListener(new ListViewItemListener(position, viewHolder));
-                    break;
-                case R.id.ll_threeview:
-                    Toast.makeText(activity,"点击事件",Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    }*/
 //   内部类
     class ViewHolder {
         TextView tv_city_cn;

@@ -1,7 +1,5 @@
 package com.example.asd.clock.Utils;
 
-import android.util.Log;
-
 import java.util.List;
 
 public class InitClockData {
@@ -19,12 +17,6 @@ public class InitClockData {
         }
         return list;
     }
-
-    public static void print(List<String> list){
-        for (int i =0;i<list.size();i++){
-            Log.i("ListItem",i+"#"+list.get(i));
-        }
-    }
     //分集合
     public static List<String> getLoopViewMinute(List<String> list){
         for (int i=0;i<60;i++){
@@ -36,7 +28,7 @@ public class InitClockData {
         }
         return list;
     }
-    //分集合
+    //小时不重复集合
     public static List<String> getLoopViewHourInTimer(List<String> list){
         for (int i=0;i<24;i++){
             list.add(i+"小时");
@@ -44,14 +36,14 @@ public class InitClockData {
         return list;
     }
 
-    //分和秒集合
+    //分不重复集合
     public static List<String> getLoopViewMinuteInTimer(List<String> list){
         for (int i=0;i<60;i++){
             list.add(i+"分");
         }
         return list;
     }
-
+    //秒不重复集合
     public static List<String> getLoopViewSecondInTimer(List<String> list){
         for (int i=0;i<60;i++){
             list.add(i+"秒");

@@ -3,18 +3,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/MWStyle"
     android:orientation="horizontal">
+    <!--顶部标题盒子-->
     <LinearLayout
         android:orientation="horizontal"
         android:background="@color/colorDark"
         style="@style/MWStyle">
+        <!--取消按钮-->
         <Button
             android:id="@+id/cancel"
             android:text="@string/cancel"
             style="@style/AddClockStyle"/>
+        <!--闹钟标题-->
         <TextView
             style="@style/MWWStyle"
             android:gravity="center_horizontal"
             android:text="@string/addclock"/>
+        <!--存储按钮-->
         <Button
             android:id="@+id/add"
             android:text="@string/add"
